@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<reports desc="Report settings">
+  <report name="1.Basic reports\01.Simple list.fr3" cache="10" groups="Clients"/>
+  <report name="1.Basic reports\06.Multi-column list.fr3" cache="600" groups="Accountants"/>
+  <report name="1.Basic reports\08.Memos and pictures.fr3" cache="100" groups="Accountants;Clients"/>
+  <report name="2.Cross-tabs\07.Two cell values.fr3" cache="20" groups=""/>
+</reports>

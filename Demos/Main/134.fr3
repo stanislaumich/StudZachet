@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<TfrxReport Version="6.5.0" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="495615" PreviewOptions.Zoom="1" PrintOptions.Printer="Default" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="37871,9968403472" ReportOptions.Description.Text="Demonstrates how to use the Table object. Notes:&#13;&#10;- to set the number of columns and rows, use &#34;ColumnCount&#34; and &#34;RowCount&#34; properties. Also you may add new columns/rows from a column/row context menu;&#13;&#10;- to join/split cells, use context menu of the cell;&#13;&#10;- to set the column/row autosize, use context menu of the column/row. " ReportOptions.LastChange="43913,5632338889" ScriptLanguage="PascalScript" ScriptText.Text="begin&#13;&#10;&#13;&#10;end.">
+  <Datasets>
+    <item DataSet="ReportData.CustomersDS" DataSetName="Customers"/>
+  </Datasets>
+  <TfrxDataPage Name="Data" Height="1000" Left="0" Top="0" Width="1000"/>
+  <TfrxReportPage Name="Page1" PaperWidth="210" PaperHeight="297" PaperSize="9" LeftMargin="5,000625" RightMargin="5,000625" TopMargin="5,000625" BottomMargin="5,000625" Columns="2" ColumnWidth="99,9992708333333" ColumnPositions.Text="0&#13;&#10;100,00" Frame.Typ="0" MirrorMode="0" HGuides.Text="" VGuides.Text="19,46">
+    <TfrxReportTitle Name="Band1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="142,26086956" Left="0" Top="16" Width="755,9012755875">
+      <TfrxMemoView Name="Memo1" AllowVectorExport="True" Left="0" Top="0" Width="760" Height="24" Font.Charset="1" Font.Color="16777215" Font.Height="-16" Font.Name="Arial" Font.Style="1" Frame.Typ="0" FillType="ftGlass" Fill.Color="32768" Fill.Blend="0,05" HAlign="haCenter" ParentFont="False" VAlign="vaCenter" Text="Customers"/>
+      <TfrxMemoView Name="Memo2" AllowVectorExport="True" Left="19,46" Top="25,73913043" Width="705,45926361" Height="114,7826087" AllowHTMLTags="True" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Arial" Font.Style="0" Frame.Color="32768" Frame.Typ="0" Fill.BackColor="52479" GapX="10" ParentFont="False" VAlign="vaCenter" Text="Demonstrates how to use the Table object. Notes:&#13;&#10;- to set the number of columns and rows, use &#60;b&#62;&#34;ColumnCount&#34;&#60;/b&#62; and &#60;b&#62;&#34;RowCount&#34;&#60;/b&#62; properties. Also you may add new columns/rows from a column/row context menu;&#13;&#10;- to join/split cells, use context menu of the cell;&#13;&#10;- to set the column/row &#60;b&#62;Autosize&#60;/b&#62;, use context menu of the column/row. &#13;&#10;- to move column/row select it and drag it with mouse holding &#60;b&#62;Ctr&#60;/b&#62;l key"/>
+    </TfrxReportTitle>
+    <TfrxMasterData Name="Band3" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="125,02575913" Left="0" Top="220" Width="377,950244092708" Columns="1" ColumnWidth="200" ColumnGap="20" DataSet="ReportData.CustomersDS" DataSetName="Customers" RowCount="0">
+      <TfrxTableObject Name="TableObject1" AllowVectorExport="True" Left="19,46" Top="1,39130435">
+        <TfrxTableColumn Name="TableColumn1" Width="150,771653543307" MinWidth="0" MaxWidth="75,5906"/>
+        <TfrxTableColumn Name="TableColumn2" Width="177,228346456693" MinWidth="0" MaxWidth="75,5906"/>
+        <TfrxTableRow Name="TableRow1" MinHeight="0" MaxHeight="0" Height="26,6666666666667">
+          <TfrxTableCell Name="TableCell1" AllowVectorExport="True" Restrictions="8" DataSet="ReportData.CustomersDS" DataSetName="Customers" Font.Charset="1" Font.Color="16777215" Font.Height="-16" Font.Name="Arial" Font.Style="1" Frame.Color="16777215" Frame.Typ="15" FillType="ftGlass" Fill.Color="32768" Fill.Blend="0,2" Fill.Hatch="True" ParentFont="False" VAlign="vaCenter" ColSpan="2" Text="[Customers.&#34;Company&#34;]"/>
+          <TfrxTableCell Name="TableCell2" AllowVectorExport="True" Restrictions="8" Frame.Typ="15" Text=""/>
+        </TfrxTableRow>
+        <TfrxTableRow Name="TableRow2" MinHeight="0" MaxHeight="0" Height="18,6666666666667">
+          <TfrxTableCell Name="TableCell6" AllowVectorExport="True" Restrictions="8" Font.Charset="1" Font.Color="16777215" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Color="16777215" Frame.Typ="15" Fill.BackColor="32768" ParentFont="False" Text="Country"/>
+          <TfrxTableCell Name="TableCell7" AllowVectorExport="True" Restrictions="8" DataField="Country" DataSet="ReportData.CustomersDS" DataSetName="Customers" Font.Charset="1" Font.Color="16777215" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Color="16777215" Frame.Typ="15" Fill.BackColor="32768" ParentFont="False" Text="[Customers.&#34;Country&#34;]"/>
+        </TfrxTableRow>
+        <TfrxTableRow Name="TableRow3" MinHeight="0" MaxHeight="0" Height="18,6666666666667">
+          <TfrxTableCell Name="TableCell11" AllowVectorExport="True" Restrictions="8" Font.Charset="1" Font.Color="16777215" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Color="16777215" Frame.Typ="15" Fill.BackColor="32768" ParentFont="False" Text="State"/>
+          <TfrxTableCell Name="TableCell12" AllowVectorExport="True" Restrictions="8" DataField="State" DataSet="ReportData.CustomersDS" DataSetName="Customers" Font.Charset="1" Font.Color="16777215" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Color="16777215" Frame.Typ="15" Fill.BackColor="32768" ParentFont="False" Text="[Customers.&#34;State&#34;]"/>
+        </TfrxTableRow>
+        <TfrxTableRow Name="TableRow4" MinHeight="0" MaxHeight="0" Height="18,6666666666667">
+          <TfrxTableCell Name="TableCell16" AllowVectorExport="True" Restrictions="8" Font.Charset="1" Font.Color="16777215" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Color="16777215" Frame.Typ="15" Fill.BackColor="32768" ParentFont="False" Text="City"/>
+          <TfrxTableCell Name="TableCell17" AllowVectorExport="True" Restrictions="8" DataField="City" DataSet="ReportData.CustomersDS" DataSetName="Customers" Font.Charset="1" Font.Color="16777215" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Color="16777215" Frame.Typ="15" Fill.BackColor="32768" ParentFont="False" Text="[Customers.&#34;City&#34;]"/>
+        </TfrxTableRow>
+        <TfrxTableRow Name="TableRow5" MinHeight="0" MaxHeight="0" Height="18,6666666666667">
+          <TfrxTableCell Name="TableCell21" AllowVectorExport="True" Restrictions="8" Font.Charset="1" Font.Color="16777215" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Color="16777215" Frame.Typ="15" Fill.BackColor="32768" ParentFont="False" Text="Phone"/>
+          <TfrxTableCell Name="TableCell22" AllowVectorExport="True" Restrictions="8" DataField="Phone" DataSet="ReportData.CustomersDS" DataSetName="Customers" Font.Charset="1" Font.Color="16777215" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Color="16777215" Frame.Typ="15" Fill.BackColor="32768" ParentFont="False" Text="[Customers.&#34;Phone&#34;]"/>
+        </TfrxTableRow>
+        <TfrxTableRow Name="TableRow6" MinHeight="0" MaxHeight="0" Height="18,6666666666667">
+          <TfrxTableCell Name="TableCell3" AllowVectorExport="True" Restrictions="8" Font.Charset="1" Font.Color="16777215" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Color="16777215" Frame.Typ="15" Fill.BackColor="32768" ParentFont="False" Text="Address"/>
+          <TfrxTableCell Name="TableCell4" AllowVectorExport="True" Restrictions="8" DataField="Addr1" DataSet="ReportData.CustomersDS" DataSetName="Customers" Font.Charset="1" Font.Color="16777215" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Color="16777215" Frame.Typ="15" Fill.BackColor="32768" ParentFont="False" Text="[Customers.&#34;Addr1&#34;]"/>
+        </TfrxTableRow>
+      </TfrxTableObject>
+    </TfrxMasterData>
+    <TfrxPageFooter Name="Band4" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="22,67718" Left="0" Top="404" Width="755,9012755875">
+      <TfrxMemoView Name="Memo6" AllowVectorExport="True" Left="0" Top="4" Width="720" Height="16" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="0" Frame.Typ="4" Frame.Width="2" Fill.BackColor="16777215" HAlign="haRight" ParentFont="False" Text="[Page#]"/>
+    </TfrxPageFooter>
+  </TfrxReportPage>
+</TfrxReport>

@@ -1,0 +1,1 @@
+frxserv.exe /uninstall

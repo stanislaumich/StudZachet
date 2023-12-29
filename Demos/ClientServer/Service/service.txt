@@ -1,0 +1,8 @@
+FastReport Server NT service demo.
+
+Install: frxserv.exe /install
+Uninstall: frxserv.exe /uninstall
+
+Star service: net start fastreport
+Stop service: net stop fastreport
+

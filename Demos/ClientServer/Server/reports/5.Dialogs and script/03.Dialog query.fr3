@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TfrxReport Name="" Version="3.20" DotMatrixReport="False" EngineOptions.UseFileCache="True" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="4095" PreviewOptions.Zoom="1" PrintOptions.Printer="Default" ReportOptions.ConnectionName="FR Demo Base" ReportOptions.CreateDate="37871,9953986921" ReportOptions.Description.Text="Demonstrates how to create simple list report with an internal query." ReportOptions.LastChange="38803,6930701505" ScriptLanguage="PascalScript" ScriptText.Text="begin&#13;&#10;&#13;&#10;end." PropData="08446174617365747301010C2C00000020446174615365743D2241444F5175657279312220446174615365744E616D653D2241444F517565727931220000095661726961626C65730100055374796C650100">
+  <TfrxDialogPage Name="DialogPage1" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Tahoma" Font.Style="0" BorderStyle="bsDialog" Caption="Enter value" Height="155" Left="283" Top="136" Width="290">
+    <TfrxEditControl Name="Edit1" Left="192" Top="24" Width="49" Height="21" Color="-2147483643" MaxLength="0" PasswordChar="0" Text="2000"/>
+    <TfrxLabelControl Name="Label1" Left="24" Top="28" Width="146" Height="13" Caption="Select if CustNo greather than" Color="-16777201"/>
+    <TfrxButtonControl Name="Button1" Left="100" Top="80" Width="75" Height="25" Caption="OK" Default="True" ModalResult="1"/>
+    <TfrxADOQuery Name="ADOQuery1" UserName="ADOQuery1" CloseDataSource="True" FieldAliases.Text="" SQL.Text="select * from customer&#13;&#10;where custno &#62; :p1" CommandTimeout="30" PropData="0A506172616D657465727301010C3A000000204E616D653D227031222044617461547970653D22667457696465537472696E67222045787072657373696F6E3D2245646974312E54657874220000"/>
+  </TfrxDialogPage>
+  <TfrxReportPage Name="Page1" PaperWidth="210" PaperHeight="297" PaperSize="9" LeftMargin="5" RightMargin="5" TopMargin="5" BottomMargin="5" Columns="1" ColumnWidth="210" ColumnPositions.Text="0" PrintOnPreviousPage="True" HGuides.Text="" VGuides.Text="">
+    <TfrxReportTitle Name="Band1" Height="30,23624" Left="0" Top="16" Width="755,906">
+      <TfrxMemoView Name="Memo1" Align="baWidth" Left="0" Top="3,77953" Width="755,906" Height="22,67718" Color="8421376" Font.Charset="1" Font.Color="16777215" Font.Height="-16" Font.Name="Arial" Font.Style="1" HAlign="haCenter" ParentFont="False" VAlign="vaCenter" Text="Customers"/>
+    </TfrxReportTitle>
+    <TfrxPageHeader Name="Band2" Height="30,23624" Left="0" Top="68" Width="755,906">
+      <TfrxMemoView Name="Memo3" Left="64,25201" Top="7,55906" Width="192,75603" Height="18,89765" Color="16777215" Font.Charset="1" Font.Color="128" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="8" ParentFont="False" Text="Company"/>
+      <TfrxMemoView Name="Memo4" Left="260,78757" Top="7,55906" Width="162,51979" Height="18,89765" Color="16777215" Font.Charset="1" Font.Color="128" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="8" ParentFont="False" Text="Address"/>
+      <TfrxMemoView Name="Memo5" Left="427,08689" Top="7,55906" Width="124,72449" Height="18,89765" Color="16777215" Font.Charset="1" Font.Color="128" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="8" ParentFont="False" Text="Contact"/>
+      <TfrxMemoView Name="Memo6" Left="555,59091" Top="7,55906" Width="90,70872" Height="18,89765" Color="16777215" Font.Charset="1" Font.Color="128" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="8" ParentFont="False" Text="Phone"/>
+      <TfrxMemoView Name="Memo7" Left="650,07916" Top="7,55906" Width="105,82684" Height="18,89765" Color="16777215" Font.Charset="1" Font.Color="128" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="8" ParentFont="False" Text="Fax"/>
+      <TfrxMemoView Name="Memo13" Left="0" Top="7,55906" Width="60,47248" Height="18,89765" Font.Charset="1" Font.Color="128" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="8" ParentFont="False" Text="CustNo"/>
+    </TfrxPageHeader>
+    <TfrxPageFooter Name="Band3" Height="26,45671" Left="0" Top="160" Width="755,906">
+      <TfrxMemoView Name="Memo2" Left="0" Top="7,55905999999999" Width="755,906" Height="15,11812" Color="16777215" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="0" Frame.Typ="4" Frame.Width="2" HAlign="haRight" ParentFont="False" Text="Page [Page#] of [TotalPages#]"/>
+    </TfrxPageFooter>
+    <TfrxMasterData Name="Band4" Height="18,89765" Left="0" Top="120" Width="755,906" Columns="1" ColumnWidth="200" ColumnGap="20" DataSet="ADOQuery1" DataSetName="ADOQuery1" RowCount="0">
+      <TfrxMemoView Name="Memo8" Left="64,25201" Top="0" Width="196,53556" Height="18,89765" DataField="Company" DataSet="ADOQuery1" DataSetName="ADOQuery1" Text="[ADOQuery1.&#34;Company&#34;]"/>
+      <TfrxMemoView Name="Memo9" Left="260,78757" Top="0" Width="166,29932" Height="18,89765" DataField="Addr1" DataSet="ADOQuery1" DataSetName="ADOQuery1" Text="[ADOQuery1.&#34;Addr1&#34;]"/>
+      <TfrxMemoView Name="Memo10" Left="427,08689" Top="0" Width="128,50402" Height="18,89765" DataField="Contact" DataSet="ADOQuery1" DataSetName="ADOQuery1" Text="[ADOQuery1.&#34;Contact&#34;]"/>
+      <TfrxMemoView Name="Memo11" Left="555,59091" Top="0" Width="94,48825" Height="18,89765" DataField="Phone" DataSet="ADOQuery1" DataSetName="ADOQuery1" Text="[ADOQuery1.&#34;Phone&#34;]"/>
+      <TfrxMemoView Name="Memo12" Left="650,07916" Top="0" Width="105,82684" Height="18,89765" DataField="FAX" DataSet="ADOQuery1" DataSetName="ADOQuery1" Text="[ADOQuery1.&#34;FAX&#34;]"/>
+      <TfrxMemoView Name="Memo14" Left="0" Top="0" Width="64,25201" Height="18,89765" DataSet="ADOQuery1" DataSetName="ADOQuery1" HAlign="haCenter" Text="[ADOQuery1.&#34;CustNo&#34;]"/>
+    </TfrxMasterData>
+  </TfrxReportPage>
+</TfrxReport>

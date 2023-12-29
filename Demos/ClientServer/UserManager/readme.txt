@@ -1,0 +1,1 @@
+Please copy compiled application in Server folder for access to user.xml file.

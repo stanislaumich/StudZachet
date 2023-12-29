@@ -1,0 +1,63 @@
+<!--#include virtual="header.html" --> || Test page
+<!--#include virtual="top.html" -->
+<p><font face="Tahoma" size="4">
+<b>List of available reports at the server</b><br></font></p>
+<font face="Tahoma" size="2">
+<!--#echo var="SERVER_REPORTS_HTML"-->
+</font>
+<p><font face="Tahoma" size="4">
+<b>Parameters testing</b>
+</font></p>
+
+<table width="750" border="0" cellspacing="2" cellpadding="2">
+<tr><td class=tit>
+<b>1.Page navigator</b>
+</td></tr>
+<tr><td class=txtbody>
+<br><a href="result?report=1.Basic reports\01.Simple list.fr3&multipage=0&pagenav=0" target=_blank>01.Simple list on single page without page navigator</a>
+<br>&nbsp;
+</td></tr>
+<tr><td class=tit>
+<b>2.Pages view</b>
+</td></tr>
+<tr><td class=txtbody>
+<br><a href="result?report=1.Basic reports\01.Simple list.fr3&multipage=0" target=_blank>01.Simple list on single page</a>
+<br><a href="result?report=1.Basic reports\01.Simple list.fr3&multipage=1" target=_blank>02.Simple list on multi page</a>
+<br>&nbsp;
+</td></tr>
+<tr><td class=tit>
+<b>3.Page range</b>
+</td></tr>
+<tr><td class=txtbody>
+<br><a href="result?report=1.Basic reports\03.Nested groups.fr3&pagerange=1-2&multipage=0&pagenav=0" target=_blank>01.Nested groups pages 1-2 on single page without pagenavigator</a>
+<br>&nbsp;
+</td></tr>
+<tr><td class=tit>
+<b>4.Custom variables</b>
+</td></tr>
+<tr><td class=txtbody>
+<br><a href="result?report=1.Basic reports\01.Simple list.fr3&multipage=0&param1=Test param1&param2=Test param2" target=_blank>01.Simple list with Param1='Test param1' and Param2='Test param2'</a>
+<br>&nbsp;
+</td></tr>
+<tr><td class=tit>
+<b>5.Export to any formats</b>
+</td></tr>
+<tr><td class=txtbody>
+<br><a href="result?report=1.Basic reports\01.Simple list.fr3&format=PDF">01.Simple list in PDF</a>
+<br><a href="result?report=1.Basic reports\03.Nested groups.fr3&format=PDF">02.Nested groups in PDF</a>
+<br><a href="result?report=2.Cross-tabs\05.Two rows, one column.fr3&format=PDF">03.Two rows, one column in PDF</a>
+<br><a href="result?report=4.Misc\04.Preview outline.fr3&format=PDF">04.Outline in PDF</a>
+<br><a href="result?report=3.Charts\01.Countries.fr3&format=PDF">05.Countries in PDF</a>
+<br><a href="result?report=1.Basic reports\01.Simple list.fr3&format=RTF">06.Simple list in RTF</a>
+<br><a href="result?report=1.Basic reports\07.Multi-column bands.fr3&format=XML">07.Multi-column bands in XML</a>
+<br><a href="result?report=1.Basic reports\07.Multi-column bands.fr3&format=XLS">08.Multi-column bands in XLS</a>
+<br><a href="result?report=1.Basic reports\02.Simple group.fr3&format=TXT">09.Simple group in TXT</a>
+<br><a href="result?report=1.Basic reports\02.Simple group.fr3&format=FRP">10.Simple group in FP3</a>
+<br><a href="result?report=1.Basic reports\02.Simple group.fr3&format=JPG">11.Simple group in JPG</a>
+<br><a href="result?report=1.Basic reports\01.Simple list.fr3&format=ODS">12.Simple list in ODS (Open Document Spreadsheet)</a>
+<br>&nbsp;
+</td></tr>
+</table>
+<!--#include virtual="bottom.html" -->
+</body>
+</html>

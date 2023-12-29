@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TfrxReport Name="" Version="3.20" DotMatrixReport="False" EngineOptions.UseFileCache="True" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="4095" PreviewOptions.Zoom="1" PrintOptions.Printer="Default" ReportOptions.ConnectionName="FR Demo Base" ReportOptions.CreateDate="37871,9968403472" ReportOptions.Description.Text="Demonstrates how to create simple list report with images and memos from DB fields. DB field placed in the memo of objects." ReportOptions.LastChange="38803,7183240625" ScriptLanguage="PascalScript" ScriptText.Text="&#13;&#10;begin&#13;&#10;&#13;&#10;end." OnStartReport="frxReport1OnStartReport" PropData="08446174617365747301010C2000000020446174615365743D2242696F2220446174615365744E616D653D2242696F220000095661726961626C657301010C11000000204E616D653D222044617461626173652200010C2C000000204E616D653D2250617468546F4461746162617365222056616C75653D22272E2E5C64656D6F2E6D646227220000055374796C650100">
+  <TfrxReportPage Name="Page1" PaperWidth="210" PaperHeight="297" PaperSize="9" LeftMargin="5" RightMargin="5" TopMargin="5" BottomMargin="5" Columns="1" ColumnWidth="210" ColumnPositions.Text="0" HGuides.Text="" VGuides.Text="">
+    <TfrxReportTitle Name="Band1" Height="26,45671" Left="0" Top="18,89765" Width="755,906">
+      <TfrxMemoView Name="Memo1" Left="0" Top="3,77953" Width="718,1107" Height="22,67718" Color="8421376" Font.Charset="1" Font.Color="16777215" Font.Height="-16" Font.Name="Arial" Font.Style="1" HAlign="haCenter" ParentFont="False" VAlign="vaCenter" Text="Fishes"/>
+    </TfrxReportTitle>
+    <TfrxPageHeader Name="Band2" Height="37,7953" Left="0" Top="68,03154" Width="755,906" PrintOnFirstPage="False">
+      <TfrxMemoView Name="Memo2" Left="0" Top="3,77952999999999" Width="718,1107" Height="15,11812" Color="16777215" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="0" Frame.Typ="8" Frame.Width="2" HAlign="haRight" ParentFont="False" Text="Fishes"/>
+    </TfrxPageHeader>
+    <TfrxMasterData Name="Band3" Height="120,94496" Left="0" Top="166,29932" Width="755,906" Columns="1" ColumnWidth="200" ColumnGap="20" DataSet="Bio" DataSetName="Bio" RowCount="0" Stretched="True">
+      <TfrxMemoView Name="Memo5" Left="0" Top="86,92919" Width="445,98454" Height="26,45671" StretchMode="smMaxHeight" Font.Charset="1" Font.Color="128" Font.Height="-11" Font.Name="Arial" Font.Style="0" HAlign="haBlock" HideZeros="True" ParentFont="False" Text="[Bio.&#34;Notes&#34;]"/>
+      <TfrxMemoView Name="Memo3" Left="0" Top="7,55905999999999" Width="445,98454" Height="71,81107" Font.Charset="1" Font.Color="32768" Font.Height="-13" Font.Name="Arial" Font.Style="0" ParentFont="False" Text="Number: [Bio.&#34;Species No&#34;]&#13;&#10;Name: [Bio.&#34;Common Name&#34;]&#13;&#10;Spec name: [Bio.&#34;Species Name&#34;]&#13;&#10;Length (cm): [Bio.&#34;Length (cm)&#34;]"/>
+      <TfrxPictureView Name="Picture1" Left="502,67749" Top="15,11812" Width="128,50402" Height="86,92919" DataField="Graphic" DataSet="Bio" DataSetName="Bio"/>
+      <TfrxLineView Name="Line1" Left="0" Top="117,16543" Width="718,1107" Height="0" Frame.Typ="4" Frame.Width="1,5"/>
+    </TfrxMasterData>
+    <TfrxPageFooter Name="Band4" Height="22,67718" Left="0" Top="347,71676" Width="755,906">
+      <TfrxMemoView Name="Memo6" Left="0" Top="3,77953000000002" Width="718,1107" Height="15,11812" Color="16777215" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="0" Frame.Typ="4" Frame.Width="2" HAlign="haRight" ParentFont="False" Text="[Page#]"/>
+    </TfrxPageFooter>
+    <TfrxADOQuery Name="Bio" UserName="Bio" CloseDataSource="True" FieldAliases.Text="Species No=Species No&#13;&#10;Category=Category&#13;&#10;Common_Name=Common Name&#13;&#10;Species Name=Species Name&#13;&#10;Length (cm)=Length (cm)&#13;&#10;Length_In=Length In&#13;&#10;Notes=Notes&#13;&#10;Graphic=Graphic" SQL.Text="select * from biolife" CommandTimeout="30" PropData="0A506172616D65746572730100"/>
+  </TfrxReportPage>
+</TfrxReport>

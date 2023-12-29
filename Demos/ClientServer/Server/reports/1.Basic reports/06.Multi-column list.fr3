@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TfrxReport Name="" Version="3.15" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="2047" PreviewOptions.Zoom="1" PrintOptions.Printer="Default" ReportOptions.ConnectionName="FR Demo Base" ReportOptions.CreateDate="37871.9964986574" ReportOptions.Description.Text="Demonstrates how to create simple report with columns. Just set number of columns in page options." ReportOptions.LastChange="38526.0224663542" ScriptLanguage="PascalScript" ScriptText.Text="begin&#13;&#10;&#13;&#10;end." OnStartReport="frxReport1OnStartReport" PropData="08446174617365747301010C2C00000020446174615365743D22437573746F6D6572732220446174615365744E616D653D22437573746F6D657273220000095661726961626C657301010C11000000204E616D653D222044617461626173652200010C2C000000204E616D653D2250617468546F4461746162617365222056616C75653D22272E2E5C64656D6F2E6D646227220000055374796C650100">
+  <TfrxReportPage Name="Page1" PaperWidth="210" PaperHeight="297" PaperSize="9" LeftMargin="5.08" RightMargin="5.08" TopMargin="5.08" BottomMargin="5.08" Columns="2" ColumnWidth="100.076" ColumnPositions.Text="0&#13;&#10;100,08" PrintOnPreviousPage="True" HGuides.Text="" VGuides.Text="">
+    <TfrxReportTitle Name="Band1" Height="26.45671" Left="0" Top="18.89765" Width="755.3012752">
+      <TfrxMemoView Name="Memo1" Left="0" Top="0" Width="737.00835" Height="22.67718" Color="8421376" Font.Charset="1" Font.Color="16777215" Font.Height="-16" Font.Name="Arial" Font.Style="1" HAlign="haCenter" Memo.Text="Customers" ParentFont="False" VAlign="vaCenter"/>
+    </TfrxReportTitle>
+    <TfrxPageFooter Name="Band2" Height="31.77953" Left="0" Top="306.14193" Width="755.3012752">
+      <TfrxMemoView Name="Memo2" Left="0" Top="8" Width="712" Height="16" Color="16777215" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="0" Frame.Typ="4" Frame.Width="2" HAlign="haRight" Memo.Text="Page [PAGE#] of [TOTALPAGES#]" ParentFont="False"/>
+    </TfrxPageFooter>
+    <TfrxMasterData Name="Band3" Height="139.84261" Left="0" Top="105.82684" Width="755.3012752" Columns="1" ColumnWidth="200" ColumnGap="20" DataSet="Customers" DataSetName="Customers" RowCount="0">
+      <TfrxMemoView Name="Memo3" Left="7.55906" Top="26.45671" Width="124.72449" Height="18.89765" Font.Charset="1" Font.Color="128" Font.Height="-13" Font.Name="Arial" Font.Style="1" Memo.Text="Company" ParentFont="False"/>
+      <TfrxMemoView Name="Memo4" Left="7.55906" Top="49.13389" Width="124.72449" Height="18.89765" Font.Charset="1" Font.Color="128" Font.Height="-13" Font.Name="Arial" Font.Style="1" Memo.Text="Address" ParentFont="False"/>
+      <TfrxMemoView Name="Memo5" Left="7.55906" Top="71.81107" Width="124.72449" Height="18.89765" Font.Charset="1" Font.Color="128" Font.Height="-13" Font.Name="Arial" Font.Style="1" Memo.Text="Contact" ParentFont="False"/>
+      <TfrxMemoView Name="Memo6" Left="7.55906" Top="94.48825" Width="124.72449" Height="18.89765" Font.Charset="1" Font.Color="128" Font.Height="-13" Font.Name="Arial" Font.Style="1" Memo.Text="Phone" ParentFont="False"/>
+      <TfrxMemoView Name="Memo7" Left="7.55906" Top="117.16543" Width="124.72449" Height="18.89765" Font.Charset="1" Font.Color="128" Font.Height="-13" Font.Name="Arial" Font.Style="1" Memo.Text="Fax" ParentFont="False"/>
+      <TfrxMemoView Name="Memo8" Left="139.84261" Top="26.45671" Width="196.53556" Height="18.89765" Frame.Typ="15" Memo.Text="[Customers.&#34;Company&#34;]"/>
+      <TfrxMemoView Name="Memo9" Left="139.84261" Top="49.13389" Width="166.29932" Height="18.89765" Frame.Typ="15" Memo.Text="[Customers.&#34;Addr1&#34;]"/>
+      <TfrxMemoView Name="Memo10" Left="139.84261" Top="71.81107" Width="136.06308" Height="18.89765" Frame.Typ="15" Memo.Text="[Customers.&#34;Contact&#34;]"/>
+      <TfrxMemoView Name="Memo11" Left="139.84261" Top="94.48825" Width="105.82684" Height="18.89765" Frame.Typ="15" Memo.Text="[Customers.&#34;Phone&#34;]"/>
+      <TfrxMemoView Name="Memo12" Left="139.84261" Top="117.16543" Width="105.82684" Height="18.89765" Frame.Typ="15" Memo.Text="[Customers.&#34;FAX&#34;]"/>
+      <TfrxMemoView Name="Memo13" Left="7.55906" Top="3.77952999999999" Width="328.81911" Height="18.89765" Font.Charset="1" Font.Color="32768" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="8" Frame.Width="2" Memo.Text="[LINE]." ParentFont="False"/>
+    </TfrxMasterData>
+    <TfrxADOQuery Name="Customers" UserName="Customers" CloseDataSource="True" FieldAliases.Text="CustNo=CustNo&#13;&#10;Company=Company&#13;&#10;Addr1=Addr1&#13;&#10;Addr2=Addr2&#13;&#10;City=City&#13;&#10;State=State&#13;&#10;Zip=Zip&#13;&#10;Country=Country&#13;&#10;Phone=Phone&#13;&#10;FAX=FAX&#13;&#10;TaxRate=TaxRate&#13;&#10;Contact=Contact&#13;&#10;LastInvoiceDate=LastInvoiceDate" SQL.Text="select * from customer order by company" PropData="0A506172616D65746572730100"/>
+  </TfrxReportPage>
+</TfrxReport>

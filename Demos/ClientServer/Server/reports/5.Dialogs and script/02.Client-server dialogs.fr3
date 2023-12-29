@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TfrxReport Name="" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="2047" PreviewOptions.Zoom="1" PrintOptions.Printer="Default" ReportOptions.CreateDate="38155,5501312847" ReportOptions.Description.Text="Demonstrates how to use interactive client-server reports." ReportOptions.LastChange="38462,5959960995" ScriptLanguage="PascalScript" ScriptText.Text="begin&#13;&#10;&#13;&#10;end." PropData="0844617461736574730100095661726961626C657301010C65000000204E616D653D2250617468546F4461746142617365222056616C75653D2227433A5C4D7950726F6A656374735C33305C536F757263655C436C69656E745365727665725C44656D6F5C5365727665725C64617461626173655C7365727665722E6D646227220000055374796C650100">
+  <TfrxReportPage Name="Page1" PaperWidth="210" PaperHeight="297" PaperSize="9" LeftMargin="10" RightMargin="10" TopMargin="10" BottomMargin="10" ColumnWidth="0" ColumnPositions.Text="" HGuides.Text="" VGuides.Text="">
+    <TfrxMemoView Name="Memo2" Left="272,12616" Top="79,37013" Width="105,82684" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" Memo.Text="Checkbox1" ParentFont="False"/>
+    <TfrxMemoView Name="Memo3" Left="0" Top="7,55906" Width="506,45702" Height="45,35436" Color="15000804" Font.Charset="1" Font.Color="0" Font.Height="-19" Font.Name="Arial" Font.Style="1" HAlign="haCenter" Memo.Text="Dialog result" ParentFont="False" VAlign="vaCenter"/>
+    <TfrxMemoView Name="Memo4" Left="272,12616" Top="105,82684" Width="105,82684" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" Memo.Text="Checkbox2" ParentFont="False"/>
+    <TfrxMemoView Name="Memo5" Left="272,12616" Top="132,28355" Width="105,82684" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" Memo.Text="Checkbox3" ParentFont="False"/>
+    <TfrxMemoView Name="Memo6" Left="26,45671" Top="79,37013" Width="105,82684" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" Memo.Text="Radiobutton1" ParentFont="False"/>
+    <TfrxMemoView Name="Memo7" Left="26,45671" Top="105,82684" Width="105,82684" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" Memo.Text="Radiobutton2" ParentFont="False"/>
+    <TfrxMemoView Name="Memo8" Left="26,45671" Top="132,28355" Width="105,82684" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" Memo.Text="Radiobutton3" ParentFont="False"/>
+    <TfrxMemoView Name="Memo9" Left="26,45671" Top="188,9765" Width="41,57483" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" Memo.Text="Edit1" ParentFont="False"/>
+    <TfrxMemoView Name="Memo10" Left="90,70872" Top="188,9765" Width="260,78757" Height="18,89765" Frame.Typ="15" Memo.Text="[Edit1.Text]"/>
+    <TfrxMemoView Name="Memo11" Left="26,45671" Top="219,21274" Width="52,91342" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" Memo.Text="Memo1" ParentFont="False"/>
+    <TfrxMemoView Name="Memo12" Left="90,70872" Top="219,21274" Width="260,78757" Height="151,1812" Frame.Typ="15" Memo.Text="[Memo1.Lines.Text]"/>
+    <TfrxMemoView Name="Memo13" Left="377,953" Top="79,37013" Width="105,82684" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" Memo.Text="[Checkbox1.Checked]" ParentFont="False"/>
+    <TfrxMemoView Name="Memo14" Left="377,953" Top="105,82684" Width="105,82684" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" Memo.Text="[Checkbox2.Checked]" ParentFont="False"/>
+    <TfrxMemoView Name="Memo15" Left="377,953" Top="132,28355" Width="105,82684" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" Memo.Text="[Checkbox3.Checked]" ParentFont="False"/>
+    <TfrxMemoView Name="Memo16" Left="132,28355" Top="79,37013" Width="105,82684" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" Memo.Text="[Radiobutton1.Checked]" ParentFont="False"/>
+    <TfrxMemoView Name="Memo17" Left="132,28355" Top="105,82684" Width="105,82684" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" Memo.Text="[Radiobutton2.Checked]" ParentFont="False"/>
+    <TfrxMemoView Name="Memo18" Left="132,28355" Top="132,28355" Width="105,82684" Height="18,89765" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" Memo.Text="[Radiobutton3.Checked]" ParentFont="False"/>
+    <TfrxMemoView Name="Memo20" Left="90,70872" Top="389,29159" Width="415,7483" Height="325,03958" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Arial" Font.Style="0" Memo.Text="[Memo19.Lines.Text]" ParentFont="False"/>
+  </TfrxReportPage>
+  <TfrxDialogPage Name="DialogPage1" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Tahoma" Font.Style="0" BorderStyle="bsDialog" Caption="Dialog 1" Height="334" Left="367" Top="181" Width="306">
+    <TfrxRadioButtonControl Name="RadioButton1" Left="28" Top="24" Width="113" Height="17" Caption="RadioButton" Checked="True" Color="-16777201"/>
+    <TfrxRadioButtonControl Name="RadioButton2" Left="28" Top="44" Width="113" Height="17" Caption="RadioButton2" Color="-16777201"/>
+    <TfrxRadioButtonControl Name="RadioButton3" Left="28" Top="64" Width="113" Height="17" Caption="RadioButton3" Color="-16777201"/>
+    <TfrxCheckBoxControl Name="CheckBox1" Left="160" Top="24" Width="97" Height="17" Caption="CheckBox1" Checked="True" State="cbChecked" Color="-16777201"/>
+    <TfrxCheckBoxControl Name="CheckBox2" Left="160" Top="44" Width="97" Height="17" Caption="CheckBox2" Color="-16777201"/>
+    <TfrxCheckBoxControl Name="CheckBox3" Left="160" Top="64" Width="97" Height="17" Caption="CheckBox3" Color="-16777201"/>
+    <TfrxEditControl Name="Edit1" Left="68" Top="100" Width="173" Height="21" Color="-16777211" MaxLength="0" PasswordChar="0" Text="Edit text"/>
+    <TfrxLabelControl Name="Label1" Left="28" Top="104" Width="24" Height="13" Caption="Edit1" Color="-16777201"/>
+    <TfrxLabelControl Name="Label2" Left="28" Top="132" Width="34" Height="13" Caption="Memo1" Color="-16777201"/>
+    <TfrxButtonControl Name="Button1" Left="108" Top="248" Width="75" Height="25" Caption="Next -&#62;" Default="True" ModalResult="1"/>
+    <TfrxMemoControl Name="Memo1" Left="68" Top="132" Width="173" Height="89" Color="-16777211" Lines.Text="Any text" MaxLength="0" OnClick="Memo1OnClick"/>
+  </TfrxDialogPage>
+  <TfrxDialogPage Name="DialogPage2" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Tahoma" Font.Style="0" BorderStyle="bsDialog" Caption="Dialog 2" Height="226" Left="298" Top="211" Width="433">
+    <TfrxButtonControl Name="Button2" Left="172" Top="144" Width="75" Height="25" Caption="Show Report" ModalResult="1"/>
+    <TfrxMemoControl Name="Memo19" Left="80" Top="28" Width="273" Height="81" Color="-16777211" Lines.Text="" MaxLength="0"/>
+  </TfrxDialogPage>
+</TfrxReport>
