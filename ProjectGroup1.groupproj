@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{0DA10D63-F8C3-40D8-8F54-21D99317F745}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="FAstreport1\PTEST.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Demos\EmbedDesigner\Designer.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Zachetka\Zachetka.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="PTEST">
+        <MSBuild Projects="FAstreport1\PTEST.dproj"/>
+    </Target>
+    <Target Name="PTEST:Clean">
+        <MSBuild Projects="FAstreport1\PTEST.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PTEST:Make">
+        <MSBuild Projects="FAstreport1\PTEST.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Designer">
+        <MSBuild Projects="Demos\EmbedDesigner\Designer.dproj"/>
+    </Target>
+    <Target Name="Designer:Clean">
+        <MSBuild Projects="Demos\EmbedDesigner\Designer.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Designer:Make">
+        <MSBuild Projects="Demos\EmbedDesigner\Designer.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Zachetka">
+        <MSBuild Projects="Zachetka\Zachetka.dproj"/>
+    </Target>
+    <Target Name="Zachetka:Clean">
+        <MSBuild Projects="Zachetka\Zachetka.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Zachetka:Make">
+        <MSBuild Projects="Zachetka\Zachetka.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="PTEST;Designer;Zachetka"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="PTEST:Clean;Designer:Clean;Zachetka:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="PTEST:Make;Designer:Make;Zachetka:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

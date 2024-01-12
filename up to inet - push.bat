@@ -1,6 +1,6 @@
 set /p place=< s:\place.txt
 cd BACKUP
-call _backupVCM.bat 
+call _backupMSU.bat 
 cd ..
 git add .
 git commit -m "AUTO FROM %place% %date% %time%"

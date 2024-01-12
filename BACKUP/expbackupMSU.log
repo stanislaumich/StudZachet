@@ -1,0 +1,48 @@
+
+Connected to: Oracle Database 11g Express Edition Release 11.2.0.2.0 - Production
+Export done in CL8MSWIN1251 character set and AL16UTF16 NCHAR character set
+server uses AL32UTF8 character set (possible charset conversion)
+
+About to export specified users ...
+. exporting pre-schema procedural objects and actions
+. exporting foreign function library names for user MSU 
+. exporting PUBLIC type synonyms
+. exporting private type synonyms
+. exporting object type definitions for user MSU 
+About to export MSU's objects ...
+. exporting database links
+. exporting sequence numbers
+. exporting cluster definitions
+. about to export MSU's tables via Conventional Path ...
+. . exporting table                            FIO
+........................
+                                                        24120 rows exported
+EXP-00091: Exporting questionable statistics.
+. . exporting table                      FIORESERV
+........................
+                                                        24120 rows exported
+. . exporting table                           LANG
+                                                            3 rows exported
+EXP-00091: Exporting questionable statistics.
+. . exporting table                            PRN
+                                                            1 rows exported
+. . exporting table                        STUDENT
+...
+                                                         3661 rows exported
+. exporting synonyms
+. exporting views
+. exporting stored procedures
+. exporting operators
+. exporting referential integrity constraints
+. exporting triggers
+. exporting indextypes
+. exporting bitmap, functional and extensible indexes
+. exporting posttables actions
+. exporting materialized views
+. exporting snapshot logs
+. exporting job queues
+. exporting refresh groups and children
+. exporting dimensions
+. exporting post-schema procedural objects and actions
+. exporting statistics
+Export terminated successfully with warnings.
