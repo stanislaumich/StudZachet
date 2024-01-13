@@ -249,7 +249,7 @@ object UMain: TUMain
     Top = 33
     Width = 960
     Height = 649
-    ActivePage = TabSheet1
+    ActivePage = TabSheet3
     Align = alClient
     TabOrder = 1
     object TabSheet1: TTabSheet
@@ -1472,10 +1472,26 @@ object UMain: TUMain
   object QMoveDown: TUniQuery
     Connection = UniConnection2
     SQL.Strings = (
-      'insert into prn select * from student where tab_num=:tab_num')
+      'insert into prn SELECT '
+      's.TAB_NUM, s.KOD_SP, f.FAM, '
+      '   f.NAME, f.OTCH, s.DAT_N, '
+      '   s.DAT_K, s.N_ZACH, s.N_VOB, '
+      '   s.FNAME, s.N_OTDEL, s.PHOTO, '
+      '   s.DAT_MAX, s.SIGNATURE'
+      'FROM '
+      'student s, fio f'
+      'where s.tab_num=f.tabnum'
+      'and f.idlang=:idlang'
+      'and s.tab_num=:tab_num'
+      '')
     Left = 306
     Top = 291
     ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'idlang'
+        Value = nil
+      end
       item
         DataType = ftUnknown
         Name = 'tab_num'
@@ -1502,11 +1518,16 @@ object UMain: TUMain
   object QueryFIO: TUniQuery
     Connection = UniConnection1
     SQL.Strings = (
-      
-        'SELECT fam,name, otch,klangvich,TAB_NUM  FROM s_famil ORDER BY t' +
-        'ab_num')
+      'SELECT fam,name, otch,klangvich,TAB_NUM  FROM s_famil '
+      'where dat_k>:dt ORDER BY tab_num')
     Left = 376
     Top = 293
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'dt'
+        Value = nil
+      end>
   end
   object Qinsfio: TUniQuery
     Connection = UniConnection2

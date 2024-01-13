@@ -111,6 +111,7 @@ type
     GroupBox10: TGroupBox;
     RadioButton3: TRadioButton;
     RadioButton4: TRadioButton;
+    CheckBox2: TCheckBox;
         procedure ClearOneExecute(Sender: TObject);
         procedure SearchOneExecute(Sender: TObject);
         procedure FormCreate(Sender: TObject);
@@ -130,6 +131,8 @@ type
         procedure Button6Click(Sender: TObject);
         procedure Button5Click(Sender: TObject);
         procedure Button7Click(Sender: TObject);
+    procedure RadioButton3Click(Sender: TObject);
+    procedure RadioButton4Click(Sender: TObject);
     private
         { Private declarations }
     public
@@ -162,8 +165,9 @@ begin
             if temp > max then
                 max := temp;
         end;
-        Grid.colWidths[i] := max + Grid.gridLineWidth + 1;
+        Grid.colWidths[i] := max + Grid.gridLineWidth + 4;
     end;
+  Grid.Repaint;
 end;
 
 Procedure TUMain.LoadIni;
@@ -176,6 +180,9 @@ begin
       '\zachetka.ini');
     Edit6.Text := ini.ReadString('ZACH', 'shablon', '');
     searchlang := ini.ReadInteger('OTHER', 'searchlang', 6);
+    if searchlang=6 then RadioButton3.Checked:=true;
+    if searchlang=131 then RadioButton4.Checked:=true;
+
     ini.free;
 end;
 
@@ -211,6 +218,8 @@ begin
 end;
 
 procedure TUMain.MovedownOneExecute(Sender: TObject);
+var
+tsearchlang:Integer;
 begin
     if StringGrid1.cells[0, StringGrid1.row] = '' then
         exit;
@@ -223,6 +232,11 @@ begin
     begin
         QMoveDown.ParamByName('tab_num').Asstring := StringGrid1.cells
           [0, StringGrid1.row];
+        tsearchlang:=searchlang;
+        if CheckBox2.Checked then tsearchlang:=6;
+
+    //    QMoveDown.ParamByName().asinteger:=tsearchlang;
+
         QMoveDown.ExecSQL;
         if Not DownTable.Active then
             DownTable.Active := true;
@@ -240,8 +254,19 @@ procedure TUMain.PrepareprintExecute(Sender: TObject);
 begin
     Rep.LoadFromFile('s:\StudZachet\ZACHx4GOOD1.fr3');
     SetVisible('Memo21', CheckBox1.Checked);
+    SetValue('Memo19','123456');
     Rep.PrepareReport();
     PageControl1.ActivePageIndex := 1;
+end;
+
+procedure TUMain.RadioButton3Click(Sender: TObject);
+begin
+ if RadioButton3.Checked then searchlang:=6;
+end;
+
+procedure TUMain.RadioButton4Click(Sender: TObject);
+begin
+ if RadioButton4.Checked then searchlang:=131;
 end;
 
 Procedure TUMain.SaveIni;
@@ -252,7 +277,7 @@ begin
     ini := tinifile.Create(extractfilepath(Application.ExeName) +
       '\zachetka.ini');
     ini.WriteString('ZACH', 'shablon', Edit6.Text);
-
+    ini.WriteInteger('OTHER', 'searchlang', searchlang);
     ini.free;
 end; // -------------------------------------------------------------------------------------------
 
@@ -349,22 +374,27 @@ begin
 end;
 
 procedure TUMain.SearchOneExecute(Sender: TObject);
+var
+ tsearchlang:integer;
 begin
     QSearch.Close;
     QSearch.SQL.Clear;
     QSearch.SQL.Add
-      ('select tab_num, fam, name, otch,dat_n, n_zach,n_vob, dat_max, n_otdel, fname from student where 1=1 ');
+      ('select s.tab_num, f.fam, f.name, f.otch,s.dat_n, s.n_zach,s.n_vob, s.dat_max, s.n_otdel, s.fname from student s, fio f where ');
+    QSearch.SQL.Add
+      ('f.tabnum=s.tab_num and idlang='+inttostr(searchlang)+' ');
     if Edit1.Text <> '' then
-        QSearch.SQL.Add(' and fam like ' +
+        QSearch.SQL.Add(' and f.fam like ' +
           Quotedstr(AnsiUpperCase(Edit1.Text) + '%'));
     if Edit2.Text <> '' then
-        QSearch.SQL.Add(' and name like ' +
+        QSearch.SQL.Add(' and f.name like ' +
           Quotedstr(AnsiUpperCase(Edit2.Text) + '%'));
     if Edit3.Text <> '' then
-        QSearch.SQL.Add(' and otch like ' +
+        QSearch.SQL.Add(' and f.otch like ' +
           Quotedstr(AnsiUpperCase(Edit3.Text) + '%'));
     if Edit4.Text <> '' then
-        QSearch.SQL.Add(' and n_zach like ' + Quotedstr(Edit4.Text + '%'));
+        QSearch.SQL.Add(' and s.n_zach like ' + Quotedstr(Edit4.Text + '%'));
+        QSearch.SQL.Add(' order by s.tab_num');
     // Qsearch.sql.Add('');
 
     QSearch.Open;

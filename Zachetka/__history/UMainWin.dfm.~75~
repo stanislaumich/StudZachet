@@ -252,8 +252,6 @@ object UMain: TUMain
     ActivePage = TabSheet1
     Align = alClient
     TabOrder = 1
-    ExplicitLeft = 8
-    ExplicitTop = 39
     object TabSheet1: TTabSheet
       Caption = #1055#1077#1095#1072#1090#1100
       object Splitter1: TSplitter
@@ -495,7 +493,6 @@ object UMain: TUMain
             RowCount = 2
             Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSizing, goColSizing, goRowSelect, goFixedRowDefAlign]
             TabOrder = 0
-            ExplicitWidth = 827
           end
           object BitBtn6: TBitBtn
             Left = 3
@@ -826,6 +823,20 @@ object UMain: TUMain
               FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
             TabOrder = 5
           end
+          object CheckBox2: TCheckBox
+            Left = 89
+            Top = 254
+            Width = 46
+            Height = 30
+            Caption = 'RU'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -19
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 6
+          end
         end
       end
       object GroupBox2: TGroupBox
@@ -957,9 +968,6 @@ object UMain: TUMain
         UseReportHints = True
         OutlineTreeSortType = dtsUnsorted
         HideScrolls = False
-        ExplicitLeft = 12
-        ExplicitTop = 142
-        ExplicitHeight = 621
       end
       object Panel4: TPanel
         Left = 0
@@ -968,6 +976,71 @@ object UMain: TUMain
         Height = 43
         Align = alTop
         TabOrder = 1
+        object BitBtn12: TBitBtn
+          Left = 0
+          Top = 0
+          Width = 37
+          Height = 37
+          Action = Prepareprint
+          Glyph.Data = {
+            F6060000424DF606000000000000360000002800000018000000180000000100
+            180000000000C006000000000000000000000000000000000000FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFDF9F6D1A076BA7033A64A00AA4D00BB6102AC4F
+            07B05409C8864DE3C0A0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC
+            F6F0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC78C58A64900C26800D48101E49A01
+            E39801E29700E49A06E49A0DDB8D15CE7C17BB5F15DCA97AFFFFFFFFFFFFFFFF
+            FFFFFFFFF2DDC5CF7E23FFFFFFFFFFFFFFFFFFF6EBE2A74B00BD6100DF9001E2
+            9701E09501DF9300E09301E0980AE39C0FE49F19E7A722EAAE2BEAAA33D18222
+            C87424FAF2E8FFFFFFDFAA6DD88E2CDB932EFFFFFFFFFFFFF6EBE2A64A00D17C
+            01E39801E09401DF9301DF9300E09304E1990AE39E14E5A21DE7A725E8AB2EEA
+            AF36ECB53EF1BD46E4A63BCC7A1FD18632E5A940F9D66FDF9936FFFFFFFFFFFF
+            A74B00D17C01E19701DF9401DF9301DF9201E09506E49B0EE5A116E8A61EE8A9
+            25E9AC2CEAAF34EDB43EEEB947F0BF50F3C556EEBB51EEBA54F6CF6DF8D472E1
+            9E37FFFFFFC78C58BC6100E39801DF9401DF9300E09403E2990AE7A113DB8E17
+            D9902DCE8632E2AD63ECC680F9DE9EF2CB68EFBD4AF1C356F3C75EF5CB65F6CE
+            6BF6D072F9D779E3A43CFDF9F6A64A00DF9101E09401DF9300E09304E29B0BE0
+            9614BE6613BF6B20DFB48CF4E3D5E6C19BDBA36DCA771CE9BE76FCE5ACF2C75A
+            F4CB66F5CE6BF6D272F8D477FBDC82E5A93FD1A076C26801E29700DF9201E094
+            06E49B0FE19716BB6414E4BF9DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE6BD8FCE
+            7C1CF5D891F4CA66F6CF6DF7D273F9D678F9D97FFCDF89E8AD44BD7337D68501
+            E29703E2990AE39D12E8A61BC56E17DFB48CFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFDBA15BE1A852FADF96F5CB5FF5CF6DF7D271F9D77AFADA80FADC85FEE390EA
+            B146AF5507C56D09D4860BE39915E9A81FE4A024C16F25FFFFFFFFFFFFFFFFFF
+            FFFFFFFAF2E7CF7E22D99234F6DEA6FFF1D3FEEFD1FEE8B7FCE19EFADB80FBDC
+            81FCDF88FDE492EDB74AFFFFFFF9F1EAEBD2BCC98348C36E19CA771ED89D66FF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3DEC2E8BB81DC973CE6AD4DF1CC82
+            FAE4B6FFF6E3FFF2D2FFECBEFFEBAFEFBB4BAD550DE8CEBBFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFF5DCB8EDBF7BE7AB40EFC366F6DB99FEEECEF2C664C47622E3B060
+            E3B060CF8832CF8832D29865E8CAAEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8E1B1F1
+            BB4BB55B00EBB32BF0CA63F8E19FFFF0CAF2D496E5B167D58F36CB7C2EE0AF7C
+            F1DAC1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBBE78E7AD42E8AA3EECBA
+            61FFFFFFFFFFFFFFFFFFBB5F03E29501E09506E39A0DE5A31CEFC55DF6D890FD
+            EBBEFEEDC7F5DA9ED78F32D28324FBF2E8FFFFFFFFFFFFFFFFFFFFFFFFE3A23C
+            FADD81FEE696FCE38EF9D573F4D075EFB841BC6106E29906E39A0FE49F19E7A4
+            23E7A92AEAAB31ECB032F5D57FDFA54FDDA15CFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFF1CF9AE7AB3EFEE491FCE491FEE592FFEAB0FCE8BAF3C665BD6509E29C09
+            E39C12E5A11BE7A727E9AD31EBAF36F2CF7CCC781AE7BD8EFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFF2D6A9E39F32FADA7DFCE18FFDE392FEE38FFFF2D1F6D47CF7
+            D999C1660AE39C09E39E14E6A21EE7A829EAAE35EAB036F9DFA1E9BE77D28322
+            E5B274EFCDA1F9EBD8EFCB98E09E3AE4A338F7D779FDE18DFCE08EFDE28FFEE8
+            AAFFF0D5EFB538FFFDF9C2690DE59C0CE49F18E7A523E9AB2CEAAF36EDB33EED
+            B640F4CC6DF9E4A9F2CF8FECC376E5AA4DEEBE5EF1C964FCDE85FBDE87FCE08B
+            FCE08CFEE59BFFF5DFF4CE6EF5D183FFFFFFC36B0FE59D0EE7A41BE19A1FE7A7
+            35ECB339EDB540EEBA48F0BE4EF0C252F3C75DF5CC68F7D171F8D576FAD87DFA
+            DA80FBDD85FCDF88FDE49BFFF2D3FBE3AAEFB63BFFFFFFFFFFFFC56F12E8A412
+            D7881BC7792FCB7824E5A943EFBA43EEBC4AF0C052F2C55AF4C963F5CD6AF6D2
+            71F8D477F9D87DFADA7FFBDD83FDE7A3FFF5DEFBE4AAEFB538FEF8EAFFFFFFFF
+            FFFFC77113C87218D8A06AFFFFFFFAF2E9CE7E27DFA043F3CB6DF2C65CF2C759
+            F4C960F4CC67F7D16EF7D573F8D778FBE098FFEFCDFEF0D4F4CE6EEFB63BFEF8
+            EAFFFFFFFFFFFFFFFFFFBF6918EFD8C2FFFFFFFFFFFFFFFFFFFFFFFFE6B881D4
+            8321E9BB6AF3D085F8DF99FBE5A9FCE5ABFEEBBCFFF3D8FAE3AFF4CF79EFB438
+            F5D183FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBF5EFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFF1D3ABE6AF62DE952CE1982BEDB95BE7A938E8A934F0
+            BF60F6D899FFFDF9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+          TabOrder = 0
+        end
       end
     end
     object TabSheet3: TTabSheet
@@ -976,9 +1049,9 @@ object UMain: TUMain
       object GroupBox6: TGroupBox
         Left = 4
         Top = 0
-        Width = 565
+        Width = 549
         Height = 57
-        Caption = 'GroupBox6'
+        Caption = #1055#1077#1095#1072#1090#1085#1072#1103' '#1092#1086#1088#1084#1072
         TabOrder = 0
         object Label11: TLabel
           Left = 12
@@ -1031,6 +1104,61 @@ object UMain: TUMain
         Caption = #1042#1089#1090#1072#1074#1080#1090#1100' '#1074' Oracle'
         TabOrder = 3
         OnClick = Button4Click
+      end
+      object Button5: TButton
+        Left = 204
+        Top = 64
+        Width = 177
+        Height = 25
+        Caption = #1042#1099#1073#1088#1072#1090#1100' '#1060#1048#1054
+        TabOrder = 4
+        OnClick = Button5Click
+      end
+      object Button6: TButton
+        Left = 204
+        Top = 95
+        Width = 177
+        Height = 25
+        Caption = #1054#1095#1080#1089#1090#1080#1090#1100' '#1060#1048#1054
+        TabOrder = 5
+        OnClick = Button6Click
+      end
+      object Button7: TButton
+        Left = 204
+        Top = 128
+        Width = 177
+        Height = 25
+        Caption = #1042#1089#1090#1072#1074#1080#1090#1100' '#1060#1048#1054
+        TabOrder = 6
+        OnClick = Button7Click
+      end
+      object GroupBox10: TGroupBox
+        Left = 559
+        Top = 0
+        Width = 117
+        Height = 57
+        Caption = #1071#1079#1099#1082' '#1087#1086#1080#1089#1082#1072
+        TabOrder = 7
+        object RadioButton3: TRadioButton
+          Left = 12
+          Top = 15
+          Width = 113
+          Height = 17
+          Caption = #1056#1091#1089#1089#1082#1080#1081
+          Checked = True
+          TabOrder = 0
+          TabStop = True
+          OnClick = RadioButton3Click
+        end
+        object RadioButton4: TRadioButton
+          Left = 12
+          Top = 32
+          Width = 113
+          Height = 17
+          Caption = #1041#1077#1083#1086#1088#1091#1089#1089#1082#1080#1081
+          TabOrder = 1
+          OnClick = RadioButton4Click
+        end
       end
     end
     object TabSheet4: TTabSheet
@@ -1370,5 +1498,53 @@ object UMain: TUMain
     BCDToCurrency = False
     Left = 120
     Top = 581
+  end
+  object QueryFIO: TUniQuery
+    Connection = UniConnection1
+    SQL.Strings = (
+      
+        'SELECT fam,name, otch,klangvich,TAB_NUM  FROM s_famil ORDER BY t' +
+        'ab_num')
+    Left = 376
+    Top = 293
+  end
+  object Qinsfio: TUniQuery
+    Connection = UniConnection2
+    SQL.Strings = (
+      'INSERT INTO MSU.FIO (FAM, NAME, '
+      '   OTCH, IDLANG, TABNUM) '
+      'VALUES (:FAM ,'
+      ' :NAME ,'
+      ' :OTCH ,'
+      ' :IDLANG ,'
+      ' :TABNUM );')
+    Left = 380
+    Top = 341
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'FAM'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'NAME'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'OTCH'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'IDLANG'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'TABNUM'
+        Value = nil
+      end>
   end
 end

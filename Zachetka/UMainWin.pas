@@ -234,8 +234,7 @@ begin
           [0, StringGrid1.row];
         tsearchlang:=searchlang;
         if CheckBox2.Checked then tsearchlang:=6;
-
-        QMoveDown.ParamByName().asinteger:=tsearchlang;
+        QMoveDown.ParamByName('idlang').asinteger:=tsearchlang;
 
         QMoveDown.ExecSQL;
         if Not DownTable.Active then
@@ -254,6 +253,7 @@ procedure TUMain.PrepareprintExecute(Sender: TObject);
 begin
     Rep.LoadFromFile('s:\StudZachet\ZACHx4GOOD1.fr3');
     SetVisible('Memo21', CheckBox1.Checked);
+    SetValue('Memo19',DatetoStr(DateTimePicker1.Date));
     Rep.PrepareReport();
     PageControl1.ActivePageIndex := 1;
 end;
@@ -529,6 +529,7 @@ end;
 procedure TUMain.Button5Click(Sender: TObject);
 begin
     QueryFIO.Close;
+    Queryfio.ParamByName('dt').AsDate:=date;
     QueryFIO.Open;
     Queryfio.Last;
     Queryfio.first;

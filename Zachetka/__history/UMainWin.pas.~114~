@@ -111,6 +111,7 @@ type
     GroupBox10: TGroupBox;
     RadioButton3: TRadioButton;
     RadioButton4: TRadioButton;
+    CheckBox2: TCheckBox;
         procedure ClearOneExecute(Sender: TObject);
         procedure SearchOneExecute(Sender: TObject);
         procedure FormCreate(Sender: TObject);
@@ -164,8 +165,9 @@ begin
             if temp > max then
                 max := temp;
         end;
-        Grid.colWidths[i] := max + Grid.gridLineWidth + 1;
+        Grid.colWidths[i] := max + Grid.gridLineWidth + 4;
     end;
+  Grid.Repaint;
 end;
 
 Procedure TUMain.LoadIni;
@@ -178,6 +180,9 @@ begin
       '\zachetka.ini');
     Edit6.Text := ini.ReadString('ZACH', 'shablon', '');
     searchlang := ini.ReadInteger('OTHER', 'searchlang', 6);
+    if searchlang=6 then RadioButton3.Checked:=true;
+    if searchlang=131 then RadioButton4.Checked:=true;
+
     ini.free;
 end;
 
@@ -213,6 +218,8 @@ begin
 end;
 
 procedure TUMain.MovedownOneExecute(Sender: TObject);
+var
+tsearchlang:Integer;
 begin
     if StringGrid1.cells[0, StringGrid1.row] = '' then
         exit;
@@ -225,6 +232,11 @@ begin
     begin
         QMoveDown.ParamByName('tab_num').Asstring := StringGrid1.cells
           [0, StringGrid1.row];
+        tsearchlang:=searchlang;
+        if CheckBox2.Checked then tsearchlang:=6;
+
+        QMoveDown.ParamByName().asinteger:=tsearchlang;
+
         QMoveDown.ExecSQL;
         if Not DownTable.Active then
             DownTable.Active := true;
@@ -361,22 +373,27 @@ begin
 end;
 
 procedure TUMain.SearchOneExecute(Sender: TObject);
+var
+ tsearchlang:integer;
 begin
     QSearch.Close;
     QSearch.SQL.Clear;
     QSearch.SQL.Add
-      ('select tab_num, fam, name, otch,dat_n, n_zach,n_vob, dat_max, n_otdel, fname from student where 1=1 ');
+      ('select s.tab_num, f.fam, f.name, f.otch,s.dat_n, s.n_zach,s.n_vob, s.dat_max, s.n_otdel, s.fname from student s, fio f where ');
+    QSearch.SQL.Add
+      ('f.tabnum=s.tab_num and idlang='+inttostr(searchlang)+' ');
     if Edit1.Text <> '' then
-        QSearch.SQL.Add(' and fam like ' +
+        QSearch.SQL.Add(' and f.fam like ' +
           Quotedstr(AnsiUpperCase(Edit1.Text) + '%'));
     if Edit2.Text <> '' then
-        QSearch.SQL.Add(' and name like ' +
+        QSearch.SQL.Add(' and f.name like ' +
           Quotedstr(AnsiUpperCase(Edit2.Text) + '%'));
     if Edit3.Text <> '' then
-        QSearch.SQL.Add(' and otch like ' +
+        QSearch.SQL.Add(' and f.otch like ' +
           Quotedstr(AnsiUpperCase(Edit3.Text) + '%'));
     if Edit4.Text <> '' then
-        QSearch.SQL.Add(' and n_zach like ' + Quotedstr(Edit4.Text + '%'));
+        QSearch.SQL.Add(' and s.n_zach like ' + Quotedstr(Edit4.Text + '%'));
+        QSearch.SQL.Add(' order by s.tab_num');
     // Qsearch.sql.Add('');
 
     QSearch.Open;
