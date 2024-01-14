@@ -1,0 +1,20 @@
+
+Connected to: Oracle Database 11g Express Edition Release 11.2.0.2.0 - Production
+
+Export file created by EXPORT:V11.02.00 via conventional path
+import done in CL8MSWIN1251 character set and AL16UTF16 NCHAR character set
+import server uses AL32UTF8 character set (possible charset conversion)
+. . importing table                          "FIO"
+........................
+                                                        24120 rows imported
+. . importing table                    "FIORESERV"
+........................
+                                                        24120 rows imported
+. . importing table                         "LANG"
+                                                            3 rows imported
+. . importing table                          "PRN"
+                                                            1 rows imported
+. . importing table                      "STUDENT"
+...
+                                                         3661 rows imported
+Import terminated successfully without warnings.
