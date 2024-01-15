@@ -10,7 +10,10 @@ uses
     System.Actions, Vcl.ActnList, Vcl.ActnMan, Vcl.ExtCtrls, frxClass,
     Vcl.StdCtrls, Vcl.Buttons,
     Vcl.Grids, frxPreview, inifiles, Data.DB, MemDS, DBAccess, Uni, UniProvider,
-    InterBaseUniProvider, OracleUniProvider, Vcl.DBGrids, frxDBSet;
+    InterBaseUniProvider, OracleUniProvider, Vcl.DBGrids, frxDBSet, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.FB, FireDAC.Phys.FBDef,
+  FireDAC.VCLUI.Wait, FireDAC.Comp.Client;
 
 type
     TUMain = class(TForm)
@@ -112,6 +115,9 @@ type
     RadioButton3: TRadioButton;
     RadioButton4: TRadioButton;
     CheckBox2: TCheckBox;
+    FDCFB: TFDConnection;
+    FDCORA: TFDConnection;
+    BitBtn13: TBitBtn;
         procedure ClearOneExecute(Sender: TObject);
         procedure SearchOneExecute(Sender: TObject);
         procedure FormCreate(Sender: TObject);
@@ -133,6 +139,7 @@ type
         procedure Button7Click(Sender: TObject);
     procedure RadioButton3Click(Sender: TObject);
     procedure RadioButton4Click(Sender: TObject);
+    procedure BitBtn13Click(Sender: TObject);
     private
         { Private declarations }
     public
@@ -416,6 +423,12 @@ begin
     (Rep.FindObject(name) as tfrxmemoview).Visible := val;
 end;
 
+procedure TUMain.BitBtn13Click(Sender: TObject);
+begin
+ if DownTable.Active then DownTable.Refresh else DownTable.Active:=true;
+ 
+end;
+
 procedure TUMain.BitBtn4Click(Sender: TObject);
 begin
     QSearch.Close;
@@ -449,8 +462,10 @@ begin
     DownTable.first;
     while not DownTable.eof do
     begin
-        s := '';
-        for i := 1 to DownTable.FieldCount - 1 do
+        s := DownTable.Fields[1].Asstring + ';' + DownTable.Fields[2].Asstring + ';' + DownTable.Fields[3].Asstring;
+        s := s + ' ' + DownTable.Fields[4].Asstring + ' ' + DownTable.Fields[5].Asstring;
+
+        for i := 6 to DownTable.FieldCount - 1 do
             if ((i = 12) or (i = 14) or (i = 7)) then
                 continue
             else

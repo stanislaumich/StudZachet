@@ -10,7 +10,10 @@ uses
     System.Actions, Vcl.ActnList, Vcl.ActnMan, Vcl.ExtCtrls, frxClass,
     Vcl.StdCtrls, Vcl.Buttons,
     Vcl.Grids, frxPreview, inifiles, Data.DB, MemDS, DBAccess, Uni, UniProvider,
-    InterBaseUniProvider, OracleUniProvider, Vcl.DBGrids, frxDBSet;
+    InterBaseUniProvider, OracleUniProvider, Vcl.DBGrids, frxDBSet, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.FB, FireDAC.Phys.FBDef,
+  FireDAC.VCLUI.Wait, FireDAC.Comp.Client;
 
 type
     TUMain = class(TForm)
@@ -112,6 +115,8 @@ type
     RadioButton3: TRadioButton;
     RadioButton4: TRadioButton;
     CheckBox2: TCheckBox;
+    FDCFB: TFDConnection;
+    FDCORA: TFDConnection;
         procedure ClearOneExecute(Sender: TObject);
         procedure SearchOneExecute(Sender: TObject);
         procedure FormCreate(Sender: TObject);
@@ -218,6 +223,8 @@ begin
 end;
 
 procedure TUMain.MovedownOneExecute(Sender: TObject);
+var
+tsearchlang:Integer;
 begin
     if StringGrid1.cells[0, StringGrid1.row] = '' then
         exit;
@@ -230,6 +237,10 @@ begin
     begin
         QMoveDown.ParamByName('tab_num').Asstring := StringGrid1.cells
           [0, StringGrid1.row];
+        tsearchlang:=searchlang;
+        if CheckBox2.Checked then tsearchlang:=6;
+        QMoveDown.ParamByName('idlang').asinteger:=tsearchlang;
+
         QMoveDown.ExecSQL;
         if Not DownTable.Active then
             DownTable.Active := true;
@@ -247,6 +258,7 @@ procedure TUMain.PrepareprintExecute(Sender: TObject);
 begin
     Rep.LoadFromFile('s:\StudZachet\ZACHx4GOOD1.fr3');
     SetVisible('Memo21', CheckBox1.Checked);
+    SetValue('Memo19',DatetoStr(DateTimePicker1.Date));
     Rep.PrepareReport();
     PageControl1.ActivePageIndex := 1;
 end;
@@ -373,9 +385,6 @@ begin
     QSearch.SQL.Clear;
     QSearch.SQL.Add
       ('select s.tab_num, f.fam, f.name, f.otch,s.dat_n, s.n_zach,s.n_vob, s.dat_max, s.n_otdel, s.fname from student s, fio f where ');
-    tsearchlang:=searchlang;
-    if CheckBox2.checked then tsearchlang:=6;
-
     QSearch.SQL.Add
       ('f.tabnum=s.tab_num and idlang='+inttostr(searchlang)+' ');
     if Edit1.Text <> '' then
@@ -445,8 +454,8 @@ begin
     DownTable.first;
     while not DownTable.eof do
     begin
-        s := '';
-        for i := 1 to DownTable.FieldCount - 1 do
+        s := DownTable.Fields[1].Asstring + ' ' + DownTable.Fields[2].Asstring + ' ' + DownTable.Fields[3].Asstring;
+        for i := 4 to DownTable.FieldCount - 1 do
             if ((i = 12) or (i = 14) or (i = 7)) then
                 continue
             else
@@ -525,6 +534,7 @@ end;
 procedure TUMain.Button5Click(Sender: TObject);
 begin
     QueryFIO.Close;
+    Queryfio.ParamByName('dt').AsDate:=date;
     QueryFIO.Open;
     Queryfio.Last;
     Queryfio.first;

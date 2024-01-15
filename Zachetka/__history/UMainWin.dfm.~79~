@@ -823,6 +823,20 @@ object UMain: TUMain
               FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
             TabOrder = 5
           end
+          object CheckBox2: TCheckBox
+            Left = 89
+            Top = 254
+            Width = 46
+            Height = 30
+            Caption = 'RU'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -19
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 6
+          end
         end
       end
       object GroupBox2: TGroupBox
@@ -1035,9 +1049,9 @@ object UMain: TUMain
       object GroupBox6: TGroupBox
         Left = 4
         Top = 0
-        Width = 565
+        Width = 549
         Height = 57
-        Caption = 'GroupBox6'
+        Caption = #1055#1077#1095#1072#1090#1085#1072#1103' '#1092#1086#1088#1084#1072
         TabOrder = 0
         object Label11: TLabel
           Left = 12
@@ -1117,6 +1131,34 @@ object UMain: TUMain
         Caption = #1042#1089#1090#1072#1074#1080#1090#1100' '#1060#1048#1054
         TabOrder = 6
         OnClick = Button7Click
+      end
+      object GroupBox10: TGroupBox
+        Left = 559
+        Top = 0
+        Width = 117
+        Height = 57
+        Caption = #1071#1079#1099#1082' '#1087#1086#1080#1089#1082#1072
+        TabOrder = 7
+        object RadioButton3: TRadioButton
+          Left = 12
+          Top = 15
+          Width = 113
+          Height = 17
+          Caption = #1056#1091#1089#1089#1082#1080#1081
+          Checked = True
+          TabOrder = 0
+          TabStop = True
+          OnClick = RadioButton3Click
+        end
+        object RadioButton4: TRadioButton
+          Left = 12
+          Top = 32
+          Width = 113
+          Height = 17
+          Caption = #1041#1077#1083#1086#1088#1091#1089#1089#1082#1080#1081
+          TabOrder = 1
+          OnClick = RadioButton4Click
+        end
       end
     end
     object TabSheet4: TTabSheet
@@ -1430,10 +1472,26 @@ object UMain: TUMain
   object QMoveDown: TUniQuery
     Connection = UniConnection2
     SQL.Strings = (
-      'insert into prn select * from student where tab_num=:tab_num')
+      'insert into prn SELECT '
+      's.TAB_NUM, s.KOD_SP, f.FAM, '
+      '   f.NAME, f.OTCH, s.DAT_N, '
+      '   s.DAT_K, s.N_ZACH, s.N_VOB, '
+      '   s.FNAME, s.N_OTDEL, s.PHOTO, '
+      '   s.DAT_MAX, s.SIGNATURE'
+      'FROM '
+      'student s, fio f'
+      'where s.tab_num=f.tabnum'
+      'and f.idlang=:idlang'
+      'and s.tab_num=:tab_num'
+      '')
     Left = 306
     Top = 291
     ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'idlang'
+        Value = nil
+      end
       item
         DataType = ftUnknown
         Name = 'tab_num'
@@ -1460,11 +1518,16 @@ object UMain: TUMain
   object QueryFIO: TUniQuery
     Connection = UniConnection1
     SQL.Strings = (
-      
-        'SELECT fam,name, otch,klangvich,TAB_NUM  FROM s_famil ORDER BY t' +
-        'ab_num')
+      'SELECT fam,name, otch,klangvich,TAB_NUM  FROM s_famil '
+      'where dat_k>:dt ORDER BY tab_num')
     Left = 376
     Top = 293
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'dt'
+        Value = nil
+      end>
   end
   object Qinsfio: TUniQuery
     Connection = UniConnection2

@@ -111,6 +111,7 @@ type
     GroupBox10: TGroupBox;
     RadioButton3: TRadioButton;
     RadioButton4: TRadioButton;
+    CheckBox2: TCheckBox;
         procedure ClearOneExecute(Sender: TObject);
         procedure SearchOneExecute(Sender: TObject);
         procedure FormCreate(Sender: TObject);
@@ -181,6 +182,7 @@ begin
     searchlang := ini.ReadInteger('OTHER', 'searchlang', 6);
     if searchlang=6 then RadioButton3.Checked:=true;
     if searchlang=131 then RadioButton4.Checked:=true;
+
     ini.free;
 end;
 
@@ -216,6 +218,8 @@ begin
 end;
 
 procedure TUMain.MovedownOneExecute(Sender: TObject);
+var
+tsearchlang:Integer;
 begin
     if StringGrid1.cells[0, StringGrid1.row] = '' then
         exit;
@@ -228,6 +232,10 @@ begin
     begin
         QMoveDown.ParamByName('tab_num').Asstring := StringGrid1.cells
           [0, StringGrid1.row];
+        tsearchlang:=searchlang;
+        if CheckBox2.Checked then tsearchlang:=6;
+        QMoveDown.ParamByName('idlang').asinteger:=tsearchlang;
+
         QMoveDown.ExecSQL;
         if Not DownTable.Active then
             DownTable.Active := true;
@@ -245,6 +253,7 @@ procedure TUMain.PrepareprintExecute(Sender: TObject);
 begin
     Rep.LoadFromFile('s:\StudZachet\ZACHx4GOOD1.fr3');
     SetVisible('Memo21', CheckBox1.Checked);
+    SetValue('Memo19',DatetoStr(DateTimePicker1.Date));
     Rep.PrepareReport();
     PageControl1.ActivePageIndex := 1;
 end;
@@ -364,6 +373,8 @@ begin
 end;
 
 procedure TUMain.SearchOneExecute(Sender: TObject);
+var
+ tsearchlang:integer;
 begin
     QSearch.Close;
     QSearch.SQL.Clear;
@@ -518,6 +529,7 @@ end;
 procedure TUMain.Button5Click(Sender: TObject);
 begin
     QueryFIO.Close;
+    Queryfio.ParamByName('dt').AsDate:=date;
     QueryFIO.Open;
     Queryfio.Last;
     Queryfio.first;

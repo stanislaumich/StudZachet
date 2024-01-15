@@ -249,7 +249,7 @@ object UMain: TUMain
     Top = 33
     Width = 960
     Height = 649
-    ActivePage = TabSheet3
+    ActivePage = TabSheet1
     Align = alClient
     TabOrder = 1
     object TabSheet1: TTabSheet
@@ -695,7 +695,7 @@ object UMain: TUMain
           end
           object BitBtn10: TBitBtn
             Left = 144
-            Top = 252
+            Top = 251
             Width = 37
             Height = 33
             Action = Prepareprint
@@ -836,6 +836,71 @@ object UMain: TUMain
             Font.Style = []
             ParentFont = False
             TabOrder = 6
+          end
+          object BitBtn13: TBitBtn
+            Left = 187
+            Top = 251
+            Width = 37
+            Height = 33
+            Glyph.Data = {
+              F6060000424DF606000000000000360000002800000018000000180000000100
+              180000000000C006000000000000000000000000000000000000FFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFDF9F6D1A076BA7033A64A00AA4D00BB6102AC4F
+              07B05409C8864DE3C0A0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC
+              F6F0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC78C58A64900C26800D48101E49A01
+              E39801E29700E49A06E49A0DDB8D15CE7C17BB5F15DCA97AFFFFFFFFFFFFFFFF
+              FFFFFFFFF2DDC5CF7E23FFFFFFFFFFFFFFFFFFF6EBE2A74B00BD6100DF9001E2
+              9701E09501DF9300E09301E0980AE39C0FE49F19E7A722EAAE2BEAAA33D18222
+              C87424FAF2E8FFFFFFDFAA6DD88E2CDB932EFFFFFFFFFFFFF6EBE2A64A00D17C
+              01E39801E09401DF9301DF9300E09304E1990AE39E14E5A21DE7A725E8AB2EEA
+              AF36ECB53EF1BD46E4A63BCC7A1FD18632E5A940F9D66FDF9936FFFFFFFFFFFF
+              A74B00D17C01E19701DF9401DF9301DF9201E09506E49B0EE5A116E8A61EE8A9
+              25E9AC2CEAAF34EDB43EEEB947F0BF50F3C556EEBB51EEBA54F6CF6DF8D472E1
+              9E37FFFFFFC78C58BC6100E39801DF9401DF9300E09403E2990AE7A113DB8E17
+              D9902DCE8632E2AD63ECC680F9DE9EF2CB68EFBD4AF1C356F3C75EF5CB65F6CE
+              6BF6D072F9D779E3A43CFDF9F6A64A00DF9101E09401DF9300E09304E29B0BE0
+              9614BE6613BF6B20DFB48CF4E3D5E6C19BDBA36DCA771CE9BE76FCE5ACF2C75A
+              F4CB66F5CE6BF6D272F8D477FBDC82E5A93FD1A076C26801E29700DF9201E094
+              06E49B0FE19716BB6414E4BF9DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE6BD8FCE
+              7C1CF5D891F4CA66F6CF6DF7D273F9D678F9D97FFCDF89E8AD44BD7337D68501
+              E29703E2990AE39D12E8A61BC56E17DFB48CFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFDBA15BE1A852FADF96F5CB5FF5CF6DF7D271F9D77AFADA80FADC85FEE390EA
+              B146AF5507C56D09D4860BE39915E9A81FE4A024C16F25FFFFFFFFFFFFFFFFFF
+              FFFFFFFAF2E7CF7E22D99234F6DEA6FFF1D3FEEFD1FEE8B7FCE19EFADB80FBDC
+              81FCDF88FDE492EDB74AFFFFFFF9F1EAEBD2BCC98348C36E19CA771ED89D66FF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3DEC2E8BB81DC973CE6AD4DF1CC82
+              FAE4B6FFF6E3FFF2D2FFECBEFFEBAFEFBB4BAD550DE8CEBBFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFF5DCB8EDBF7BE7AB40EFC366F6DB99FEEECEF2C664C47622E3B060
+              E3B060CF8832CF8832D29865E8CAAEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8E1B1F1
+              BB4BB55B00EBB32BF0CA63F8E19FFFF0CAF2D496E5B167D58F36CB7C2EE0AF7C
+              F1DAC1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBBE78E7AD42E8AA3EECBA
+              61FFFFFFFFFFFFFFFFFFBB5F03E29501E09506E39A0DE5A31CEFC55DF6D890FD
+              EBBEFEEDC7F5DA9ED78F32D28324FBF2E8FFFFFFFFFFFFFFFFFFFFFFFFE3A23C
+              FADD81FEE696FCE38EF9D573F4D075EFB841BC6106E29906E39A0FE49F19E7A4
+              23E7A92AEAAB31ECB032F5D57FDFA54FDDA15CFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFF1CF9AE7AB3EFEE491FCE491FEE592FFEAB0FCE8BAF3C665BD6509E29C09
+              E39C12E5A11BE7A727E9AD31EBAF36F2CF7CCC781AE7BD8EFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFF2D6A9E39F32FADA7DFCE18FFDE392FEE38FFFF2D1F6D47CF7
+              D999C1660AE39C09E39E14E6A21EE7A829EAAE35EAB036F9DFA1E9BE77D28322
+              E5B274EFCDA1F9EBD8EFCB98E09E3AE4A338F7D779FDE18DFCE08EFDE28FFEE8
+              AAFFF0D5EFB538FFFDF9C2690DE59C0CE49F18E7A523E9AB2CEAAF36EDB33EED
+              B640F4CC6DF9E4A9F2CF8FECC376E5AA4DEEBE5EF1C964FCDE85FBDE87FCE08B
+              FCE08CFEE59BFFF5DFF4CE6EF5D183FFFFFFC36B0FE59D0EE7A41BE19A1FE7A7
+              35ECB339EDB540EEBA48F0BE4EF0C252F3C75DF5CC68F7D171F8D576FAD87DFA
+              DA80FBDD85FCDF88FDE49BFFF2D3FBE3AAEFB63BFFFFFFFFFFFFC56F12E8A412
+              D7881BC7792FCB7824E5A943EFBA43EEBC4AF0C052F2C55AF4C963F5CD6AF6D2
+              71F8D477F9D87DFADA7FFBDD83FDE7A3FFF5DEFBE4AAEFB538FEF8EAFFFFFFFF
+              FFFFC77113C87218D8A06AFFFFFFFAF2E9CE7E27DFA043F3CB6DF2C65CF2C759
+              F4C960F4CC67F7D16EF7D573F8D778FBE098FFEFCDFEF0D4F4CE6EEFB63BFEF8
+              EAFFFFFFFFFFFFFFFFFFBF6918EFD8C2FFFFFFFFFFFFFFFFFFFFFFFFE6B881D4
+              8321E9BB6AF3D085F8DF99FBE5A9FCE5ABFEEBBCFFF3D8FAE3AFF4CF79EFB438
+              F5D183FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBF5EFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFF1D3ABE6AF62DE952CE1982BEDB95BE7A938E8A934F0
+              BF60F6D899FFFDF9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+            TabOrder = 7
+            OnClick = BitBtn13Click
           end
         end
       end
@@ -1228,8 +1293,8 @@ object UMain: TUMain
       'begin'
       ''
       'end.')
-    Left = 648
-    Top = 237
+    Left = 708
+    Top = 9
     Datasets = <>
     Variables = <>
     Style = <>
@@ -1277,8 +1342,8 @@ object UMain: TUMain
     Username = 'sysdba'
     Server = 'localhost'
     Connected = True
-    Left = 296
-    Top = 121
+    Left = 628
+    Top = 173
     EncryptedPassword = '92FF9EFF8CFF8BFF9AFF8DFF94FF9AFF86FF'
   end
   object Query1: TUniQuery
@@ -1319,8 +1384,8 @@ object UMain: TUMain
         'GROUP BY tab_num, kod_sp, fam, name, otch, dat_n,dat_k, n_zach, ' +
         'n_vob, '
       'fname, n_otdel, SIGNATURE, PHOTO')
-    Left = 376
-    Top = 121
+    Left = 172
+    Top = 417
     ParamData = <
       item
         DataType = ftUnknown
@@ -1329,22 +1394,24 @@ object UMain: TUMain
       end>
   end
   object InterBaseUniProvider1: TInterBaseUniProvider
-    Left = 448
-    Top = 121
+    Left = 804
+    Top = 177
   end
   object OracleUniProvider1: TOracleUniProvider
-    Left = 452
-    Top = 181
+    Left = 804
+    Top = 229
   end
   object UniConnection2: TUniConnection
     ProviderName = 'Oracle'
     Port = 3050
-    Database = 'XE'
+    SpecificOptions.Strings = (
+      'Oracle.Direct=True')
     Username = 'msu'
-    Server = 'XE'
+    Server = 'localhost/XE'
     Connected = True
-    Left = 300
-    Top = 181
+    LoginPrompt = False
+    Left = 632
+    Top = 249
     EncryptedPassword = '92FF8CFF8AFF'
   end
   object Query2: TUniQuery
@@ -1370,8 +1437,8 @@ object UMain: TUMain
       ' :SIGNATURE ,'
       ' :PHOTO ,'
       ' :DAT_MAX  )')
-    Left = 376
-    Top = 181
+    Left = 220
+    Top = 417
     ParamData = <
       item
         DataType = ftUnknown
@@ -1448,26 +1515,25 @@ object UMain: TUMain
     Connection = UniConnection2
     SQL.Strings = (
       'truncate table student')
-    Left = 376
-    Top = 233
+    Left = 268
+    Top = 417
   end
   object QSearch: TUniQuery
     Connection = UniConnection2
-    Left = 304
-    Top = 237
+    Left = 320
+    Top = 413
   end
   object DownTable: TUniTable
     TableName = 'PRN'
     Connection = UniConnection2
-    Active = True
     AfterRefresh = DownTableAfterRefresh
-    Left = 16
-    Top = 581
+    Left = 92
+    Top = 517
   end
   object DataSource1: TDataSource
     DataSet = DownTable
-    Left = 56
-    Top = 581
+    Left = 176
+    Top = 517
   end
   object QMoveDown: TUniQuery
     Connection = UniConnection2
@@ -1484,8 +1550,8 @@ object UMain: TUMain
       'and f.idlang=:idlang'
       'and s.tab_num=:tab_num'
       '')
-    Left = 306
-    Top = 291
+    Left = 366
+    Top = 411
     ParamData = <
       item
         DataType = ftUnknown
@@ -1512,16 +1578,16 @@ object UMain: TUMain
     CloseDataSource = False
     DataSet = DownTable
     BCDToCurrency = False
-    Left = 120
-    Top = 581
+    Left = 252
+    Top = 517
   end
   object QueryFIO: TUniQuery
     Connection = UniConnection1
     SQL.Strings = (
       'SELECT fam,name, otch,klangvich,TAB_NUM  FROM s_famil '
       'where dat_k>:dt ORDER BY tab_num')
-    Left = 376
-    Top = 293
+    Left = 480
+    Top = 421
     ParamData = <
       item
         DataType = ftUnknown
@@ -1539,8 +1605,8 @@ object UMain: TUMain
       ' :OTCH ,'
       ' :IDLANG ,'
       ' :TABNUM );')
-    Left = 380
-    Top = 341
+    Left = 428
+    Top = 421
     ParamData = <
       item
         DataType = ftUnknown
@@ -1567,5 +1633,21 @@ object UMain: TUMain
         Name = 'TABNUM'
         Value = nil
       end>
+  end
+  object FDCFB: TFDConnection
+    Params.Strings = (
+      'DriverID=FB'
+      'Database=d:\msu.fdb'
+      'Password=masterkey'
+      'User_Name=sysdba')
+    Connected = True
+    LoginPrompt = False
+    Left = 492
+    Top = 181
+  end
+  object FDCORA: TFDConnection
+    LoginPrompt = False
+    Left = 492
+    Top = 249
   end
 end
