@@ -1,9 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>1899.12.30 00:00:00.000.934,S:\StudZachet\Zachetka\Zachetka.dproj=S:\_programming\Project1.dproj</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.008,=S:\_programming\Unit2.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.518,S:\StudZachet\Zachetka\UMainWin.pas=S:\_programming\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.008,=S:\_programming\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.934,S:\StudZachet\Zachetka\Zachetka.dproj=S:\_programming\Project1.dproj</Transaction>
     <Transaction>1899.12.30 00:00:00.000.518,S:\StudZachet\Zachetka\UMainWin.dfm=S:\_programming\Unit2.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.350,S:\StudZachet\Zachetka\Unit2.dfm=S:\StudZachet\Zachetka\UAskreprint.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.866,=S:\StudZachet\Zachetka\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.350,S:\StudZachet\Zachetka\Unit2.pas=S:\StudZachet\Zachetka\UAskreprint.pas</Transaction>
   </Transactions>
 </BorlandProject>

@@ -1106,6 +1106,15 @@ object UMain: TUMain
             BF60F6D899FFFDF9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
           TabOrder = 0
         end
+        object Button8: TButton
+          Left = 56
+          Top = 4
+          Width = 33
+          Height = 21
+          Caption = 'Button8'
+          TabOrder = 1
+          OnClick = Button8Click
+        end
       end
     end
     object TabSheet3: TTabSheet
@@ -1115,7 +1124,7 @@ object UMain: TUMain
         Left = 4
         Top = 0
         Width = 549
-        Height = 57
+        Height = 65
         Caption = #1055#1077#1095#1072#1090#1085#1072#1103' '#1092#1086#1088#1084#1072
         TabOrder = 0
         object Label11: TLabel
@@ -1124,6 +1133,13 @@ object UMain: TUMain
           Width = 88
           Height = 13
           Caption = #1064#1072#1073#1083#1086#1085' '#1079#1072#1095#1077#1090#1082#1080':'
+        end
+        object Label12: TLabel
+          Left = 31
+          Top = 43
+          Width = 69
+          Height = 13
+          Caption = #1060#1072#1081#1083' '#1086#1090#1095#1077#1090#1072':'
         end
         object Edit6: TEdit
           Left = 106
@@ -1141,6 +1157,23 @@ object UMain: TUMain
           Caption = #1042#1099#1073#1088#1072#1090#1100
           TabOrder = 1
           OnClick = Button1Click
+        end
+        object Edit8: TEdit
+          Left = 106
+          Top = 40
+          Width = 355
+          Height = 21
+          TabOrder = 2
+          Text = 'Edit8'
+        end
+        object Button9: TButton
+          Left = 467
+          Top = 40
+          Width = 75
+          Height = 22
+          Caption = #1042#1099#1073#1088#1072#1090#1100
+          TabOrder = 3
+          OnClick = Button9Click
         end
       end
       object Button2: TButton
@@ -1279,6 +1312,8 @@ object UMain: TUMain
   end
   object Rep: TfrxReport
     Version = '6.8.4'
+    DataSet = frxDBDataset1
+    DataSetName = 'frxDBDataset1'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     Preview = frxPreview1
@@ -1293,6 +1328,7 @@ object UMain: TUMain
       'begin'
       ''
       'end.')
+    OnPrintPage = RepPrintPage
     Left = 708
     Top = 9
     Datasets = <>
@@ -1326,6 +1362,7 @@ object UMain: TUMain
     end
     object DeleteDownOne: TAction
       Hint = #1059#1076#1072#1083#1080#1090#1100' '#1079#1072#1087#1080#1089#1100' '#1080#1079' '#1090#1072#1073#1083#1080#1094#1099' '#1087#1077#1095#1072#1090#1080
+      OnExecute = DeleteDownOneExecute
     end
     object Prepareprint: TAction
       OnExecute = PrepareprintExecute
@@ -1342,8 +1379,8 @@ object UMain: TUMain
     Username = 'sysdba'
     Server = 'localhost'
     Connected = True
-    Left = 628
-    Top = 173
+    Left = 888
+    Top = 177
     EncryptedPassword = '92FF9EFF8CFF8BFF9AFF8DFF94FF9AFF86FF'
   end
   object Query1: TUniQuery
@@ -1384,8 +1421,8 @@ object UMain: TUMain
         'GROUP BY tab_num, kod_sp, fam, name, otch, dat_n,dat_k, n_zach, ' +
         'n_vob, '
       'fname, n_otdel, SIGNATURE, PHOTO')
-    Left = 172
-    Top = 417
+    Left = 16
+    Top = 325
     ParamData = <
       item
         DataType = ftUnknown
@@ -1397,25 +1434,60 @@ object UMain: TUMain
     Left = 804
     Top = 177
   end
-  object OracleUniProvider1: TOracleUniProvider
-    Left = 804
-    Top = 229
+  object DataSource1: TDataSource
+    DataSet = DownQuery
+    Left = 228
+    Top = 401
   end
-  object UniConnection2: TUniConnection
-    ProviderName = 'Oracle'
-    Port = 3050
-    SpecificOptions.Strings = (
-      'Oracle.Direct=True')
-    Username = 'msu'
-    Server = 'localhost/XE'
+  object SaveDialog1: TSaveDialog
+    Left = 908
+    Top = 105
+  end
+  object frxDBDataset1: TfrxDBDataset
+    UserName = 'frxDBDataset1'
+    CloseDataSource = False
+    DataSet = Prn_Page
+    BCDToCurrency = False
+    Left = 428
+    Top = 405
+  end
+  object QueryFIO: TUniQuery
+    Connection = UniConnection1
+    SQL.Strings = (
+      'SELECT fam,name, otch,klangvich,TAB_NUM  FROM s_famil '
+      'where dat_k>:dt ORDER BY tab_num')
+    Left = 16
+    Top = 381
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'dt'
+        Value = nil
+      end>
+  end
+  object FDCFB: TFDConnection
+    Params.Strings = (
+      'DriverID=FB'
+      'Database=d:\msu.fdb'
+      'Password=masterkey'
+      'User_Name=sysdba')
     Connected = True
     LoginPrompt = False
-    Left = 632
-    Top = 249
-    EncryptedPassword = '92FF8CFF8AFF'
+    Left = 644
+    Top = 257
   end
-  object Query2: TUniQuery
-    Connection = UniConnection2
+  object FDCORA: TFDConnection
+    Params.Strings = (
+      'DriverID=Ora'
+      'User_Name=msu'
+      'Password=msu')
+    Connected = True
+    LoginPrompt = False
+    Left = 352
+    Top = 249
+  end
+  object Query2: TFDQuery
+    Connection = FDCORA
     SQL.Strings = (
       'INSERT INTO STUDENT ('
       '   TAB_NUM, KOD_SP, FAM, '
@@ -1437,106 +1509,80 @@ object UMain: TUMain
       ' :SIGNATURE ,'
       ' :PHOTO ,'
       ' :DAT_MAX  )')
-    Left = 220
-    Top = 417
+    Left = 226
+    Top = 299
     ParamData = <
       item
-        DataType = ftUnknown
         Name = 'TAB_NUM'
-        Value = nil
+        ParamType = ptInput
       end
       item
-        DataType = ftUnknown
         Name = 'KOD_SP'
-        Value = nil
+        ParamType = ptInput
       end
       item
-        DataType = ftUnknown
         Name = 'FAM'
-        Value = nil
+        ParamType = ptInput
       end
       item
-        DataType = ftUnknown
         Name = 'NAME'
-        Value = nil
+        ParamType = ptInput
       end
       item
-        DataType = ftUnknown
         Name = 'OTCH'
-        Value = nil
+        ParamType = ptInput
       end
       item
-        DataType = ftUnknown
         Name = 'DAT_N'
-        Value = nil
+        ParamType = ptInput
       end
       item
-        DataType = ftUnknown
         Name = 'DAT_K'
-        Value = nil
+        ParamType = ptInput
       end
       item
-        DataType = ftUnknown
         Name = 'N_ZACH'
-        Value = nil
+        ParamType = ptInput
       end
       item
-        DataType = ftUnknown
         Name = 'N_VOB'
-        Value = nil
+        ParamType = ptInput
       end
       item
-        DataType = ftUnknown
         Name = 'FNAME'
-        Value = nil
+        ParamType = ptInput
       end
       item
-        DataType = ftUnknown
         Name = 'N_OTDEL'
-        Value = nil
+        ParamType = ptInput
       end
       item
-        DataType = ftUnknown
         Name = 'SIGNATURE'
-        Value = nil
+        ParamType = ptInput
       end
       item
-        DataType = ftUnknown
         Name = 'PHOTO'
-        Value = nil
+        ParamType = ptInput
       end
       item
-        DataType = ftUnknown
         Name = 'DAT_MAX'
-        Value = nil
+        ParamType = ptInput
       end>
   end
-  object Query3: TUniQuery
-    Connection = UniConnection2
+  object Query3: TFDQuery
+    Connection = FDCORA
     SQL.Strings = (
       'truncate table student')
-    Left = 268
-    Top = 417
+    Left = 266
+    Top = 299
   end
-  object QSearch: TUniQuery
-    Connection = UniConnection2
-    Left = 320
-    Top = 413
+  object QSearch: TFDQuery
+    Connection = FDCORA
+    Left = 310
+    Top = 299
   end
-  object DownTable: TUniTable
-    TableName = 'PRN'
-    Connection = UniConnection2
-    AfterRefresh = DownTableAfterRefresh
-    Left = 92
-    Top = 517
-  end
-  object DataSource1: TDataSource
-    DataSet = DownTable
-    Left = 176
-    Top = 517
-  end
-  object QMoveDown: TUniQuery
-    Connection = UniConnection2
+  object QMoveDown: TFDQuery
+    Connection = FDCORA
     SQL.Strings = (
       'insert into prn SELECT '
       's.TAB_NUM, s.KOD_SP, f.FAM, '
@@ -1550,53 +1596,20 @@ object UMain: TUMain
       'and f.idlang=:idlang'
       'and s.tab_num=:tab_num'
       '')
-    Left = 366
-    Top = 411
+    Left = 358
+    Top = 299
     ParamData = <
       item
-        DataType = ftUnknown
-        Name = 'idlang'
-        Value = nil
+        Name = 'IDLANG'
+        ParamType = ptInput
       end
       item
-        DataType = ftUnknown
-        Name = 'tab_num'
-        Value = nil
+        Name = 'TAB_NUM'
+        ParamType = ptInput
       end>
   end
-  object SaveDialog1: TSaveDialog
-    Left = 908
-    Top = 105
-  end
-  object QTemp: TUniQuery
-    Connection = UniConnection2
-    Left = 664
-    Top = 8
-  end
-  object frxDBDataset1: TfrxDBDataset
-    UserName = 'frxDBDataset1'
-    CloseDataSource = False
-    DataSet = DownTable
-    BCDToCurrency = False
-    Left = 252
-    Top = 517
-  end
-  object QueryFIO: TUniQuery
-    Connection = UniConnection1
-    SQL.Strings = (
-      'SELECT fam,name, otch,klangvich,TAB_NUM  FROM s_famil '
-      'where dat_k>:dt ORDER BY tab_num')
-    Left = 480
-    Top = 421
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'dt'
-        Value = nil
-      end>
-  end
-  object Qinsfio: TUniQuery
-    Connection = UniConnection2
+  object QInsFio: TFDQuery
+    Connection = FDCORA
     SQL.Strings = (
       'INSERT INTO MSU.FIO (FAM, NAME, '
       '   OTCH, IDLANG, TABNUM) '
@@ -1605,49 +1618,48 @@ object UMain: TUMain
       ' :OTCH ,'
       ' :IDLANG ,'
       ' :TABNUM );')
-    Left = 428
-    Top = 421
+    Left = 414
+    Top = 297
     ParamData = <
       item
-        DataType = ftUnknown
         Name = 'FAM'
-        Value = nil
+        ParamType = ptInput
       end
       item
-        DataType = ftUnknown
         Name = 'NAME'
-        Value = nil
+        ParamType = ptInput
       end
       item
-        DataType = ftUnknown
         Name = 'OTCH'
-        Value = nil
+        ParamType = ptInput
       end
       item
-        DataType = ftUnknown
         Name = 'IDLANG'
-        Value = nil
+        ParamType = ptInput
       end
       item
-        DataType = ftUnknown
         Name = 'TABNUM'
-        Value = nil
+        ParamType = ptInput
       end>
   end
-  object FDCFB: TFDConnection
-    Params.Strings = (
-      'DriverID=FB'
-      'Database=d:\msu.fdb'
-      'Password=masterkey'
-      'User_Name=sysdba')
-    Connected = True
-    LoginPrompt = False
-    Left = 492
-    Top = 181
+  object QTemp: TFDQuery
+    Connection = FDCORA
+    Left = 458
+    Top = 295
   end
-  object FDCORA: TFDConnection
-    LoginPrompt = False
-    Left = 492
-    Top = 249
+  object DownQuery: TFDQuery
+    Active = True
+    Connection = FDCORA
+    SQL.Strings = (
+      'select * from prn')
+    Left = 230
+    Top = 351
+  end
+  object Prn_Page: TFDTable
+    Active = True
+    Connection = FDCORA
+    TableName = 'PRN_PAGE'
+    Left = 298
+    Top = 403
   end
 end
