@@ -1,0 +1,278 @@
+unit Umain;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, ZBase, ZPort, ZReader, ZRClasses, Utils;
+
+type
+  TForm1 = class(TForm)
+    Button1: TButton;
+    Edit1: TEdit;
+    Memo1: TMemo;
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    procedure DoReadUL(const ANum: TZ_KEYNUM);
+    procedure PrintMfDataAccess(Const AData4);
+    procedure PrintMfTrailerAccess(Const AData4);
+    procedure DoRead1K4K(const ANum: TZ_KEYNUM; ACdType: TZR_CARD_TYPE);
+  end;
+
+
+//+++++++++++++++++++++++++++++
+const
+  RdPortType = ZP_PORT_COM;
+  RdPortName = 'COM3';
+  MfAuthKey: TZR_MF_AUTH_KEY = (6,
+    $FF, $FF, $FF, $FF, $FF, $FF, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+  );
+var
+  g_hRd: THandle;
+
+//++++++++++++++++++++++++++++++
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+// Поиск карт в поле считывателя
+//function ZR_Rd_SearchCards(AHandle: THandle; AMaxCard: Integer=ZR_SEARCH_MAXCARD; AFlags:Cardinal=0): HResult; stdcall;
+
+
+procedure TForm1.DoReadUL(const ANum: TZ_KEYNUM);
+var
+  i, j: Integer;
+  aBuf: array[0..15, 0..3] of Byte; // 16 страниц по 4 байта
+  s: String;
+  n: Cardinal;
+begin
+  CheckZRError(ZR_Rd_SelectCard(g_hRd, ANum, ZR_CD_UL));
+  for i := 0 to 15 do // цикл по страницам
+  begin
+    if (i mod 4) = 0 then
+      CheckZRError(ZR_Rd_ReadMfCardBlock(g_hRd, i, aBuf[i, 0], 0));
+
+    s := format('%.2d. %.2X %.2X %.2X %.2X', [
+            i, aBuf[i, 0], aBuf[i, 1], aBuf[i, 2], aBuf[i, 3]]);
+    case i of
+      0,1:
+        Writeln(s + ' SN');
+      2:
+      begin
+        Writeln(s);
+        n := aBuf[i, 2];
+        Memo1.Lines.Add(format('Lock0[%.2X] BOTP:%d, BL9-4:%d, BL15-10:%d, OTP:%d, L4:%d, L5:%d, L6:%d, L7:%d', [
+            n,
+            n and 1,
+            (n shr 1) and 1,
+            (n shr 2) and 1,
+            (n shr 3) and 1,
+            (n shr 4) and 1,
+            (n shr 5) and 1,
+            (n shr 6) and 1,
+            (n shr 7) and 1]));
+        n := aBuf[i, 3];
+        Memo1.Lines.Add(format('Lock1[%.2X] L8:%d, L9:%d, L10:%d, L11:%d, L12:%d, L13:%d, L14:%d, L15:%d', [
+            n,
+            n and 1,
+            (n shr 1) and 1,
+            (n shr 2) and 1,
+            (n shr 3) and 1,
+            (n shr 4) and 1,
+            (n shr 5) and 1,
+            (n shr 6) and 1,
+            (n shr 7) and 1]));
+      end;
+      3: // OTP
+      begin
+        Memo1.Lines.Add(s);
+        s := '00000000 00000000 00000000 00000000';
+        n := PCardinal(@aBuf[i, 0])^;
+        j := 1;
+        while j <= 35 do
+        begin
+          if (n and 1) <> 0 then
+            s[j] := '1';
+          n := n shr 1;
+          Inc(j);
+          if (j mod 8) = 0 then
+            Inc(j);
+        end;
+        if GetBit(aBuf[2, 2], 3) then
+          Memo1.Lines.Add(format('OTP: %s [%.4X] Locked', [s, PCardinal(@aBuf[i, 0])^]))
+        else
+          Memo1.Lines.Add(format('OTP: %s [%.4X]', [s, PCardinal(@aBuf[i, 0])^]));
+      end
+      else
+      begin
+        if GetBit(PWord(@aBuf[2, 2])^, i) then
+          s := s + ' Locked';
+        Memo1.Lines.Add(s);
+      end;
+    end;
+  end;
+  Writeln('Done.');
+end;
+
+procedure TForm1.PrintMfDataAccess(Const AData4);
+var
+  nAcc: Cardinal;
+  i: Integer;
+begin
+  Memo1.Lines.Add('-----');
+  Memo1.Lines.Add('Area | C1 C2 C3 |  Read   |  Write  |   Inc   | Dec, Transfer, Restore');
+  for i := 0 to 2 do
+  begin
+    CheckZRError(ZR_DecodeMfAccessBits(i, nAcc, @AData4));
+    case nAcc of
+      //                'Area | C1 C2 C3 |  Read   |  Write  |   Inc   | Dec, Transfer, Restore'
+      0: Memo1.Lines.Add(format('   %d |  0  0  0 | key A,B | key A,B | key A,B | key A,B', [i]));
+      2: Memo1.Lines.Add(format('   %d |  0  1  0 | key A,B |  never  |  never  | never', [i]));
+      4: Memo1.Lines.Add(format('   %d |  1  0  0 | key A,B |  key B  |  never  | never', [i]));
+      6: Memo1.Lines.Add(format('   %d |  1  1  0 | key A,B |  key B  |  key B  | key A,B', [i]));
+      1: Memo1.Lines.Add(format('   %d |  0  0  1 | key A,B |  never  |  never  | key A,B', [i]));
+      3: Memo1.Lines.Add(format('   %d |  0  1  1 |  key B  |  key B  |  never  | never', [i]));
+      5: Memo1.Lines.Add(format('   %d |  1  0  1 |  key B  |  never  |  never  | never', [i]));
+      7: Memo1.Lines.Add(format('   %d |  1  1  1 |  never  |  never  |  never  | never', [i]));
+    end;
+  end;
+end;
+
+procedure TForm1.PrintMfTrailerAccess(Const AData4);
+var
+  nAcc: Cardinal;
+begin
+  Memo1.Lines.Add('-----');
+  Memo1.Lines.Add('Trail| C1 C2 C3 | Read A | Write A | Read Acc | Write Acc | Read B | Write B');
+  CheckZRError(ZR_DecodeMfAccessBits(3, nAcc, @AData4));
+  case nAcc of
+    //         'Trail| C1 C2 C3 | Read A | Write A | Read Acc | Write Acc | Read B | Write B'
+    0: Memo1.Lines.Add('   3 |  0  0  0 | never  |  key A  |  key A   |   never   | key A  |  key A');
+    2: Memo1.Lines.Add('   3 |  0  1  0 | never  |  never  |  key A   |   never   | key A  |  never');
+    4: Memo1.Lines.Add('   3 |  1  0  0 | never  |  key B  | key A,B  |   never   | never  |  key B');
+    6: Memo1.Lines.Add('   3 |  1  1  0 | never  |  never  | key A,B  |   never   | never  |  never');
+    1: Memo1.Lines.Add('   3 |  0  0  1 | never  |  key A  |  key A   |   key A   | key A  |  key A');
+    3: Memo1.Lines.Add('   3 |  0  1  1 | never  |  key B  | key A,B  |   key B   | never  |  key B');
+    5: Memo1.Lines.Add('   3 |  1  0  1 | never  |  never  | key A,B  |   key B   | never  |  never');
+    7: Memo1.Lines.Add('   3 |  1  1  1 | never  |  never  | key A,B  |   never   | never  |  never');
+  end;
+end;
+
+
+procedure TForm1.DoRead1K4K(const ANum: TZ_KEYNUM; ACdType: TZR_CARD_TYPE);
+var
+  i, nSectN, nSBlockN, nMax, nSBlockMax(*, n*): Integer;
+  aBuf: array[0..15] of Byte; // 1 блок по 16 байт
+  hr: HResult;
+  nStartTick: Cardinal;
+begin
+  ZR_Rd_SetCapture(g_hRd);
+  try
+    CheckZRError(ZR_Rd_SelectCard(g_hRd, ANum, ACdType));
+    nStartTick := GetTickCount();
+    if ACdType = ZR_CD_4K then
+      nMax := 256
+    else
+      nMax := 64;
+    i := 0;
+    while i < nMax do // цикл по блокам
+    begin
+      if (ACdType = ZR_CD_4K) and (i > 127) then
+      begin
+        nSectN := ((i - 128) div 16);
+        nSBlockN := ((i - 128) mod 16);
+        nSBlockMax := 16;
+      end
+      else
+      begin
+        nSectN := (i div 4);
+        nSBlockN := (i mod 4);
+        nSBlockMax := 4;
+      end;
+      if nSBlockN = 0 then
+      begin
+        hr := ZR_Rd_AuthorizeSect(g_hRd, i, @MfAuthKey, 0);
+        if FAILED(hr) then
+        begin
+          if hr = ZR_E_AUTHORIZE then
+          begin
+            Memo1.Lines.Add(format('Authorize sector %d error.', [nSectN]));
+            Inc(i, nSBlockMax);
+            continue;
+          end;
+          CheckZRError(hr);
+        end;
+        Memo1.Lines.Add('-----------------------');
+        Memo1.Lines.Add(format('Sector %d', [nSectN]));
+      end;
+      hr := ZR_Rd_ReadMfCardBlock(g_hRd, i, aBuf[0], 0);
+      if FAILED(hr) then
+      begin
+        if hr = ZR_E_CARDNACK then
+        begin
+          Memo1.Lines.Add(format('%.2d (%d-%d). Card nack.', [i, nSectN, nSBlockN]));
+          Inc(i);
+          continue;
+        end;
+        CheckZRError(hr);
+      end;
+      Memo1.Lines.Add(format('%.2d (%d-%d). %.2X %.2X %.2X %.2X %.2X %.2X %.2X %.2X' +
+          ' %.2X %.2X %.2X %.2X %.2X %.2X %.2X %.2X', [
+          i, nSectN, nSBlockN,
+          aBuf[0], aBuf[1], aBuf[2], aBuf[3],
+          aBuf[4], aBuf[5], aBuf[6], aBuf[7],
+          aBuf[8], aBuf[9], aBuf[10], aBuf[11],
+          aBuf[12], aBuf[13], aBuf[14], aBuf[15]]));
+      if nSBlockN = (nSBlockMax - 1) then
+      begin
+        PrintMfDataAccess(aBuf[6]);
+        PrintMfTrailerAccess(aBuf[6]);
+      end;
+      Inc(i);
+    end;
+    Memo1.Lines.Add(format('Total time: %d ms.', [GetTickSpan(nStartTick, GetTickCount())]));
+  finally
+    ZR_Rd_ReleaseCapture(g_hRd);
+  end;
+  Memo1.Lines.Add('Done.');
+end;
+
+
+
+
+
+
+
+procedure TForm1.Button1Click(Sender: TObject);
+var
+  rOpen: TZR_RD_Open_Params;
+  rRdInf: TZR_Rd_Info;
+  rInfo: TZR_Card_Info;
+  s: String;
+  hr: HResult;
+
+begin
+      CheckZRError(ZR_Rd_SearchCards(g_hRd, 1));
+      hr := ZR_Rd_FindNextCard(g_hRd, @rInfo);
+      CheckZRError(hr);
+
+
+
+  case rInfo.nType of
+              ZR_CD_UL: DoReadUL(rInfo.nNum);
+              ZR_CD_PLUS4K,
+              ZR_CD_1K,
+              ZR_CD_4K: DoRead1K4K(rInfo.nNum, rInfo.nType);
+              else Writeln('Cannot read card.')
+            end;
+
+end;
+
+end.

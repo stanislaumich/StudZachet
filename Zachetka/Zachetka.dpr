@@ -2,7 +2,7 @@ program Zachetka;
 
 uses
   Vcl.Forms,
-  UMainWin in 'UMainWin.pas' {UMain},
+  UMainWin in 'UMainWin.pas' {UMain} ,
   UAskreprint in 'UAskreprint.pas' {FAskreprint};
 
 {$R *.res}

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.296,S:\_programming\Unit1.dfm=S:\StudZachet\CHIP\Umain.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.296,S:\_programming\Unit1.pas=S:\StudZachet\CHIP\Umain.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.854,=S:\_programming\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.597,S:\_programming\Project1.dproj=S:\StudZachet\CHIP\CHIP.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

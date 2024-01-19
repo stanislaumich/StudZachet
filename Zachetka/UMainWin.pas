@@ -19,7 +19,7 @@ uses
     FireDAC.VCLUI.Wait, FireDAC.Comp.Client, FireDAC.Phys.Oracle,
     FireDAC.Phys.OracleDef,
     FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
-    FireDAC.Comp.DataSet;
+    FireDAC.Comp.DataSet, ZBase, ZPort, ZReader,  ZRClasses, Utils;
 
 type
     TUMain = class(TForm)
@@ -95,7 +95,7 @@ type
         SaveDialog1: TSaveDialog;
         BitBtn9: TBitBtn;
         BitBtn10: TBitBtn;
-    frxDBDataset1: TfrxDBDataset;
+        frxDBDataset1: TfrxDBDataset;
         BitBtn11: TBitBtn;
         MovedownOne: TAction;
         MoveDownAll: TAction;
@@ -122,11 +122,39 @@ type
         QInsFio: TFDQuery;
         QTemp: TFDQuery;
         DownQuery: TFDQuery;
-        Button8: TButton;
-    Prn_Page: TFDTable;
-    Edit8: TEdit;
-    Label12: TLabel;
-    Button9: TButton;
+        Prn_Page: TFDTable;
+        Edit8: TEdit;
+        Label12: TLabel;
+        Button9: TButton;
+        BitBtn14: TBitBtn;
+    RadioButton5: TRadioButton;
+    RadioButton6: TRadioButton;
+    Panel5: TPanel;
+    Label13: TLabel;
+    Edit9: TEdit;
+    Button8: TButton;
+    TabSheet5: TTabSheet;
+    GroupBox11: TGroupBox;
+    Memo1: TMemo;
+    StringGrid2: TStringGrid;
+    DateTimePicker2: TDateTimePicker;
+    Button10: TButton;
+    Button11: TButton;
+    Label14: TLabel;
+    Label15: TLabel;
+    Edit10: TEdit;
+    Edit11: TEdit;
+    BitBtn15: TBitBtn;
+    ReadChip: TAction;
+    GroupBox12: TGroupBox;
+    Label16: TLabel;
+    ComboBox5: TComboBox;
+    BitBtn16: TBitBtn;
+    WriteInDoc: TAction;
+    Label17: TLabel;
+    Label18: TLabel;
+    Edit12: TEdit;
+    Edit13: TEdit;
         procedure ClearOneExecute(Sender: TObject);
         procedure SearchOneExecute(Sender: TObject);
         procedure FormCreate(Sender: TObject);
@@ -152,7 +180,13 @@ type
         procedure DeleteDownOneExecute(Sender: TObject);
         procedure RepPrintPage(Page: TfrxReportPage; CopyNo: Integer);
         procedure Button8Click(Sender: TObject);
-    procedure Button9Click(Sender: TObject);
+        procedure Button9Click(Sender: TObject);
+        procedure BitBtn10Click(Sender: TObject);
+    procedure RadioButton6Click(Sender: TObject);
+    procedure RadioButton5Click(Sender: TObject);
+    procedure Button11Click(Sender: TObject);
+    procedure ReadChipExecute(Sender: TObject);
+    procedure WriteInDocExecute(Sender: TObject);
     private
         { Private declarations }
     public
@@ -164,13 +198,26 @@ type
         Procedure LoadIni;
         Procedure SaveIni;
         function MakePRN: boolean; // true - breakprint
-        function Askreprint: integer;
+        function Askreprint: Integer;
         procedure SavePrintedToFile();
+        procedure FillStringBSO(StringGrid1: TStringGrid; QSearch: TFDQuery);
     end;
 
 var
     UMain: TUMain;
     searchlang: Integer;
+
+
+  // +++++++++++++++++++++++++++++
+const
+  RdPortType = ZP_PORT_COM;
+
+
+var
+  g_hRd: THandle;
+  RdPortName:string;// = 'COM3';
+  // ++++++++++++++++++++++++++++++
+
 
 implementation
 
@@ -206,6 +253,7 @@ begin
       '\zachetka.ini');
     Edit6.Text := ini.ReadString('ZACH', 'shablon', '');
     Edit8.Text := ini.ReadString('ZACH', 'repfile', '');
+    Edit9.Text := ini.ReadString('BILET', 'shablon', '');
     searchlang := ini.ReadInteger('OTHER', 'searchlang', 6);
     if searchlang = 6 then
         RadioButton3.Checked := true;
@@ -280,61 +328,62 @@ begin
 end;
 
 procedure TUMain.SavePrintedToFile();
- var
-  i,j:integer;
-  s:string;
-  f:textfile;
- begin
- {$i-}
-  Assignfile(f,Edit8.text);
-  Append(f);
-  if IOResult<>0 then rewrite(f);  
-  prn_page.first;
-  while not prn_page.eof do
-   begin
-      s := prn_page.Fields[0].Asstring + ';'+ prn_page.Fields[1].Asstring + ';'
-      + prn_page.Fields[2].Asstring + ' ' + prn_page.Fields[3].Asstring;
-        s := s + ' ' + prn_page.Fields[4].Asstring + '4' + prn_page.Fields
+var
+    i, j: Integer;
+    s: string;
+    f: textfile;
+begin
+{$I-}
+    Assignfile(f, Edit8.Text);
+    Append(f);
+    if IOResult <> 0 then
+        rewrite(f);
+    Prn_Page.first;
+    while not Prn_Page.eof do
+    begin
+        s := Prn_Page.Fields[0].Asstring + ';' + Prn_Page.Fields[1].Asstring +
+          ';' + Prn_Page.Fields[2].Asstring + ' ' + Prn_Page.Fields[3].Asstring;
+        s := s + ' ' + Prn_Page.Fields[4].Asstring + '4' + Prn_Page.Fields
           [5].Asstring;
 
-        for i := 6 to prn_page.FieldCount - 1 do
+        for i := 6 to Prn_Page.FieldCount - 1 do
             if ((i = 12) or (i = 14) or (i = 7)) then
                 continue
             else
-                s := s + ';' + prn_page.Fields[i].Asstring;
+                s := s + ';' + Prn_Page.Fields[i].Asstring;
         delete(s, 1, 1);
         Writeln(f, s);
-    prn_page.next;
-   end;
+        Prn_Page.next;
+    end;
 
-  Closefile(f);
- {$i+}
- end;
+    Closefile(f);
+{$I+}
+end;
 
-function TUMain.Askreprint: integer;
- var
-  i:integer;
- begin
-  FaskReprint.ShowModal;
-  Askreprint:=Faskreprint.tag;
- end;
+function TUMain.Askreprint: Integer;
+var
+    i: Integer;
+begin
+    FaskReprint.ShowModal;
+    Askreprint := FaskReprint.tag;
+end;
 
 function TUMain.MakePRN: boolean; // true - breakprint
 var
     i: Integer;
     ask: Integer;
 begin
-    //sleep(1000);
-    prn_page.Close;
-    prn_page.Open;
+    // sleep(1000);
+    Prn_Page.Close;
+    Prn_Page.Open;
     ask := 1;
 
     while ask = 1 do // перепечатать!!!
     begin
-        //Rep.PrepareReport()
+        // Rep.PrepareReport()
         if Rep.PrepareReport() then
-        Rep.Print;
-        ask := askreprint;
+            Rep.Print;
+        ask := Askreprint;
     end;
     SavePrintedToFile();
     QTemp.Close;
@@ -347,19 +396,20 @@ end;
 procedure TUMain.PrepareprintExecute(Sender: TObject);
 var
     i: Integer;
-    ex:boolean;
+    ex: boolean;
 begin
-    Rep.LoadFromFile(edit6.text{'s:\StudZachet\ZACHx4GOOD1.fr3'});
-    SetVisible('Memo21', CheckBox1.Checked);
-    SetValue('Memo19', DatetoStr(DateTimePicker1.Date));
+    if CheckBox1.Checked then showmessage('Печатается дубликат!!!');
+    // Rep.LoadFromFile(edit6.text{'s:\StudZachet\ZACHx4GOOD1.fr3'});
+    // SetVisible('Memo21', CheckBox1.Checked);
+    // SetValue('Memo19', DatetoStr(DateTimePicker1.Date));
     DownQuery.first;
-    PageControl1.ActivePageIndex := 1;
+    // PageControl1.ActivePageIndex := 1;
     QTemp.Close;
     QTemp.SQL.Clear;
     QTemp.SQL.Add('truncate table prn_page');
     QTemp.ExecSQL;
     i := 0;
-    ex:=true;
+    ex := true;
     While not DownQuery.eof do
     begin
         QTemp.Close;
@@ -370,12 +420,12 @@ begin
         if (i mod 4 = 3) then
         begin
             if MakePRN then
-             begin
-                ex:=false;
+            begin
+                ex := false;
                 break;
-             end;
+            end;
         end;
-        DownQuery.Next;
+        DownQuery.next;
         i := i + 1;
     end;
     if (i mod 4 <> 0) and ex then // остаток что там осталось допечатать
@@ -398,7 +448,6 @@ begin
       end;
     }
 
-
 end;
 
 procedure TUMain.RadioButton3Click(Sender: TObject);
@@ -413,9 +462,85 @@ begin
         searchlang := 131;
 end;
 
+procedure TUMain.RadioButton5Click(Sender: TObject);
+begin
+if Radiobutton5.Checked then Panel5.color:=clGradientActiveCaption;
+end;
+
+procedure TUMain.RadioButton6Click(Sender: TObject);
+begin
+if Radiobutton6.Checked then Panel5.color:=clYellow;
+end;
+
+procedure TUMain.ReadChipExecute(Sender: TObject);
+var
+  rOpen: TZR_RD_Open_Params;
+  rRdInf: TZR_Rd_Info;
+  rInfo: TZR_Card_Info;
+  s: String;
+  hr: HResult;
+  ss:string;
+begin
+// тут мы считываем чип в edit11
+
+RdPortName := ComboBox5.Text;//'COM3';
+
+  CheckZRError(ZR_Initialize(ZP_IF_NO_MSG_LOOP));
+  g_hRd := 0;
+
+  try
+    Memo1.Lines.Add(format('Open reader (%s)...', [RdPortName]));
+    FillChar(rOpen, SizeOf(rOpen), 0);
+    rOpen.pszName := PChar(RdPortName);
+    rOpen.nType := RdPortType;
+    FillChar(rRdInf, SizeOf(rRdInf), 0);
+    CheckZRError(ZR_Rd_Open(g_hRd, rOpen, @rRdInf));
+    if (rRdInf.nType <> ZR_RD_Z2M) and (rRdInf.nType <> ZR_RD_M3N) and
+      (rRdInf.nType <> ZR_RD_CPZ2MF) and (rRdInf.nType <> ZR_RD_Z2MFI) then
+    begin
+      Memo1.Lines.Add('It is not Mifare Reader!');
+      Readln;
+      exit;
+    end;
+
+    CheckZRError(ZR_Rd_SearchCards(g_hRd, 1));
+    hr := ZR_Rd_FindNextCard(g_hRd, @rInfo);
+    CheckZRError(hr);
+
+        Memo1.Lines.Add(format('%s %s', [
+            CardTypeStrs[rInfo.nType], ZKeyNumToStr(rInfo.nNum, rInfo.nType)]));
+      Edit11.Text:=ZKeyNumToStr(rInfo.nNum, rInfo.nType);
+      ss:=EDit11.Text;
+      if ss[1]='[' then
+       begin
+         Edit11.Text:=('НЕ СЧИТАНО');
+       end;
+    if g_hRd <> 0 then
+      ZR_CloseHandle(g_hRd);
+    ZR_Finalyze();
+
+  Except
+   on E:Exception do
+    begin
+     E:=Nil;
+     ShowMessage('Нет чипа в считывателе, либо не подключен считыватель');
+     if g_hRd <> 0 then
+      ZR_CloseHandle(g_hRd);
+    ZR_Finalyze();
+    end;
+  end;
+
+
+
+
+
+
+
+end;
+
 procedure TUMain.RepPrintPage(Page: TfrxReportPage; CopyNo: Integer);
 begin
-   // ShowMessage('печатаю страницу');
+    // ShowMessage('печатаю страницу');
 end;
 
 Procedure TUMain.SaveIni;
@@ -428,6 +553,7 @@ begin
     ini.WriteString('ZACH', 'shablon', Edit6.Text);
     ini.WriteString('ZACH', 'repfile', Edit8.Text);
     ini.WriteInteger('OTHER', 'searchlang', searchlang);
+    ini.WriteString('BILET', 'shablon', Edit9.Text);
     ini.free;
 end; // -------------------------------------------------------------------------------------------
 
@@ -472,7 +598,7 @@ begin
             break;
         for j := 0 to QSearch.FieldCount - 1 do
             StringGrid1.cells[j, i + 1] := QSearch.Fields[j].Asstring;
-        QSearch.Next;
+        QSearch.next;
         // if Qsearch.eof then break;
 
     end;
@@ -488,6 +614,7 @@ end;
 procedure TUMain.FormCreate(Sender: TObject);
 var
     i: Integer;
+    f: textfile;
 begin
     DateTimePicker1.Date := Date;
     LoadIni;
@@ -497,7 +624,7 @@ begin
     while not QTemp.eof do
     begin
         ComboBox1.items.Add(QTemp.FieldByName('n_otdel').Asstring);
-        QTemp.Next;
+        QTemp.next;
     end;
     ComboBox1.Text := '';
     QTemp.SQL.Clear;
@@ -506,7 +633,7 @@ begin
     while not QTemp.eof do
     begin
         ComboBox2.items.Add(QTemp.FieldByName('fname').Asstring);
-        QTemp.Next;
+        QTemp.next;
     end;
     ComboBox2.Text := '';
     QTemp.SQL.Clear;
@@ -515,10 +642,18 @@ begin
     while not QTemp.eof do
     begin
         ComboBox3.items.Add(QTemp.FieldByName('n_vob').Asstring);
-        QTemp.Next;
+        QTemp.next;
     end;
     ComboBox3.Text := '';
     QTemp.SQL.Clear;
+    Assignfile(f, extractfilepath(Application.ExeName) + '\log.txt');
+{$I-}
+    Append(f);
+    if IOResult <> 0 then
+        rewrite(f);
+    Writeln(f, datetostr(Date));
+    Closefile(f);
+{$I+}
     { курс
       Qtemp.SQL.Add('select distinct n_vob from student');
       QTemp.Open();
@@ -530,7 +665,7 @@ begin
       ComboBox3.Text:='';
       QTemp.SQL.Clear;
     }
-
+       PageControl1.ActivePageIndex := 0;
 end;
 
 procedure TUMain.SearchOneExecute(Sender: TObject);
@@ -577,6 +712,53 @@ begin
     (Rep.FindObject(name) as tfrxmemoview).Visible := val;
 end;
 
+procedure TUMain.WriteInDocExecute(Sender: TObject);
+begin
+// выбрать, нет ли их уже в базе
+//
+
+// если ок то записать
+end;
+
+procedure TUMain.BitBtn10Click(Sender: TObject);
+
+begin
+    QTemp.Close;
+    QTemp.SQL.Clear;
+    QTemp.SQL.Add('select * from prn');
+    QTemp.Open;
+    if QTemp.RecordCount<=0 then exit;
+    QTemp.Close;
+    QTemp.SQL.Clear;
+    QTemp.SQL.Add('truncate table prn_page');
+    QTemp.ExecSQL;
+    QTemp.Close;
+    QTemp.SQL.Clear;
+    QTemp.SQL.Add('insert into prn_page select * from prn where tab_num=' +
+      DownQuery.FieldByName('tab_num').Asstring);
+    QTemp.ExecSQL;
+    Prn_Page.Close;
+    Prn_Page.Open;
+    Rep.Clear;
+    if radiobutton5.Checked then
+     begin
+    Rep.LoadFromFile(Edit6.Text { 's:\StudZachet\ZACHx4GOOD1.fr3' } );
+    SetVisible('Memo21', CheckBox1.Checked);
+    SetValue('Memo19', datetostr(DateTimePicker1.Date));
+    end
+    else
+    begin
+     Rep.LoadFromFile(Edit6.Text { 's:\StudZachet\ZACHx4GOOD1.fr3' } );
+    SetVisible('Memo21', CheckBox1.Checked);
+    SetValue('Memo19', datetostr(DateTimePicker1.Date));
+    end;
+    Rep.PrepareReport(true);
+    Rep.ShowPreparedReport;
+    // rep.RefreshActivePreviewedReport;
+    // Rep.Print;
+    PageControl1.ActivePageIndex := 1;
+end;
+
 procedure TUMain.BitBtn13Click(Sender: TObject);
 begin
     if DownQuery.Active then
@@ -615,7 +797,7 @@ begin
         else
             exit;
     Assignfile(f, Edit7.Text);
-    Rewrite(f);
+    rewrite(f);
     DownQuery.first;
     while not DownQuery.eof do
     begin
@@ -631,9 +813,38 @@ begin
                 s := s + ';' + DownQuery.Fields[i].Asstring;
         delete(s, 1, 1);
         Writeln(f, s);
-        DownQuery.Next;
+        DownQuery.next;
     end;
     Closefile(f);
+end;
+
+procedure TUMain.FillStringBSO(StringGrid1: TStringGrid; QSearch: TFDQuery);
+var
+    i, j: Integer;
+begin
+    ClearString(StringGrid1);
+    StringGrid1.colcount := QSearch.FieldCount;
+    StringGrid1.rowcount := QSearch.RecordCount + 1;
+    QSearch.first;
+    for i := 0 to QSearch.RecordCount do
+    begin
+        if QSearch.eof then
+            break;
+        for j := 0 to QSearch.FieldCount - 1 do
+            StringGrid1.cells[j, i + 1] := QSearch.Fields[j].Asstring;
+        QSearch.next;
+    end;
+    Autow(StringGrid1);
+end;
+
+procedure TUMain.Button11Click(Sender: TObject);
+begin
+QTemp.Close;
+QTemp.SQL.Clear;
+QTemp.SQL.Add('select f.tabnum,nzach, getfio(f.tabnum,6) fio,nbso,nchip from sdoc d, fio f where ');
+QTemp.SQL.Add('f.tabnum=d.tabnum and f.idlang=6');
+QTemp.Open();
+FillStringBSO(Stringgrid2,QTemp);
 end;
 
 procedure TUMain.Button1Click(Sender: TObject);
@@ -695,7 +906,7 @@ begin
         Query2.ParamByName('DAT_MAX').AsDate := Query1.FieldByName('MAX')
           .AsDateTime;
         Query2.ExecSQL;
-        Query1.Next;
+        Query1.next;
     end;
     ShowMessage('Done');
 end;
@@ -737,7 +948,7 @@ begin
         QInsFio.ParamByName('OTCH').Asstring :=
           QueryFIO.FieldByName('OTCH').Asstring;
         QInsFio.ExecSQL;
-        QueryFIO.Next;
+        QueryFIO.next;
     end;
     ShowMessage('Done');
 
@@ -745,18 +956,16 @@ end;
 
 procedure TUMain.Button8Click(Sender: TObject);
 begin
-    // dbset.First;
-    // dbset.RangeBegin:=rbCurrent;
-    // dbset.RangeEndCount:=4;
-    Rep.Print;
+  If OpenDialog1.Execute() then
+        Edit9.Text := OpenDialog1.filename;
 end;
 
 procedure TUMain.Button9Click(Sender: TObject);
 begin
- if OpenDialog1.Execute() then
-  begin
-     Edit8.Text:=OpenDialog1.Filename;
-  end;
+    if OpenDialog1.Execute() then
+    begin
+        Edit8.Text := OpenDialog1.filename;
+    end;
 end;
 
 procedure TUMain.CheckBox1Click(Sender: TObject);
@@ -766,6 +975,8 @@ begin
     else
         Panel3.Color := clCream;
     Panel3.Repaint;
+
+    BitBtn10Click(CheckBox1);
 end;
 
 procedure TUMain.CleardownAllExecute(Sender: TObject);

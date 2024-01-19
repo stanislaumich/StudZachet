@@ -3,7 +3,8 @@ unit UAskreprint;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons;
 
 type
@@ -30,20 +31,20 @@ implementation
 
 procedure TFAskreprint.BitBtn1Click(Sender: TObject);
 begin
- Faskreprint.tag:=1;
- Faskreprint.Close;
+  FAskreprint.tag := 1;
+  FAskreprint.Close;
 end;
 
 procedure TFAskreprint.BitBtn2Click(Sender: TObject);
 begin
- Faskreprint.tag:=0;
- Faskreprint.Close;
+  FAskreprint.tag := 0;
+  FAskreprint.Close;
 end;
 
 procedure TFAskreprint.BitBtn3Click(Sender: TObject);
 begin
- Faskreprint.tag:=2;
- Faskreprint.Close;
+  FAskreprint.tag := 2;
+  FAskreprint.Close;
 end;
 
 end.
